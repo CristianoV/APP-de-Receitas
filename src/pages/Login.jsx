@@ -15,7 +15,7 @@ function Login(props) {
   useEffect(() => {
     const rule = 6;
     const regexEmail = /\S+@\S+\.\S+/.test(login.email);
-    if (regexEmail && login.password.length >= rule) {
+    if (regexEmail && login.password.length > rule) {
       setClick(false);
     } else {
       setClick(true);
@@ -33,7 +33,7 @@ function Login(props) {
   const handleEnter = () => {
     const { history } = props;
     localSetItem();
-    history.push('/food');
+    history.push('/foods');
   };
 
   return (

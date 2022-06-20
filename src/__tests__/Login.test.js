@@ -26,9 +26,9 @@ describe('Testando o componente Login', () => {
 
     expect(button.disabled).toBe(true);
     userEvent.type(email, 'email@email.com');
-    userEvent.type(password, '123456');
+    userEvent.type(password, '1234567');
     expect(button.disabled).toBe(false);
     userEvent.click(button);
-    expect(history.location.pathname).toBe('/food');
+    expect(history.location.pathname).toBe('/foods');
   });
 });
