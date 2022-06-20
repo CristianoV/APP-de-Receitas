@@ -12,7 +12,6 @@ function Login(props) {
       [name]: value,
     });
   };
-
   useEffect(() => {
     const rule = 6;
     const regexEmail = /\S+@\S+\.\S+/.test(login.email);

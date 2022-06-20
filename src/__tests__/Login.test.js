@@ -17,8 +17,18 @@ describe('Testando o componente Login', () => {
     expect(button).toBeInTheDocument();
   });
   it('Realize as seguintes verificações nos campos de email, senha e botão:', () => {
-    renderWithRouterAndRedux(<App />);
+    const { history } = renderWithRouterAndRedux(<App />);
     const button = screen.getByTestId(id.ID_ENTER);
-    expect(button).toBeDisabled();
+    const email = screen.getByTestId(id.ID_EMAIL);
+    const password = screen.getByTestId(id.ID_PASSAWORD);
+
+    expect(history.location.pathname).toBe('/');
+
+    expect(button.disabled).toBe(true);
+    userEvent.type(email, 'email@email.com');
+    userEvent.type(password, '123456');
+    expect(button.disabled).toBe(false);
+    userEvent.click(button);
+    expect(history.location.pathname).toBe('/food');
   });
 });
