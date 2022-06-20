@@ -10,7 +10,7 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={ Login } />
+        <Route exact path="/" render={ (props) => <Login { ...props } /> } />
       </Switch>
     </div>
   );
