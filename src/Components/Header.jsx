@@ -128,6 +128,9 @@ Header.propTypes = {
   ).isRequired,
   inputSearchDispatch: PropTypes.func.isRequired,
   SearchDispatch: PropTypes.func.isRequired,
+  SearchReceitas: PropTypes.func.isRequired,
+  SearchNome: PropTypes.func.isRequired,
+  SearchLetra: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Header);
