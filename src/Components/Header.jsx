@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import { setInputSearch, setSearchHeader } from '../redux/action/index';
+import { setInputSearch,
+  setReceitas, setSearchHeader,
+  setNome, setLetra } from '../redux/action/headerAction';
 
 function Header(props) {
   const [filter, setFilter] = useState('');
@@ -24,14 +26,21 @@ function Header(props) {
   };
 
   const setInputRedux = () => {
-    const { inputSearchDispatch, SearchDispatch } = props;
+    const { inputSearchDispatch, SearchDispatch,
+      SearchReceitas, SearchNome, SearchLetra } = props;
     inputSearchDispatch(inputFilter);
     SearchDispatch(filter);
+    switch (inputFilter) {
+    case 'Ingredientes':
+      return SearchReceitas(filter);
+    case 'Letra':
+      return SearchLetra(filter);
+    case 'Nome':
+      return SearchNome(filter);
+    default:
+      return null;
+    }
   };
-
-  useEffect(() => {
-
-  }, [filter]);
 
   return (
     <>
@@ -108,13 +117,17 @@ function Header(props) {
 const mapDispatchToProps = (dispatch) => ({
   inputSearchDispatch: (input) => dispatch(setInputSearch(input)),
   SearchDispatch: (search) => dispatch(setSearchHeader(search)),
-
+  SearchReceitas: (search) => dispatch(setReceitas(search)),
+  SearchNome: (search) => dispatch(setNome(search)),
+  SearchLetra: (search) => dispatch(setLetra(search)),
 });
 
 Header.propTypes = {
   location: PropTypes.shape(
     { pathname: PropTypes.string },
   ).isRequired,
+  inputSearchDispatch: PropTypes.func.isRequired,
+  SearchDispatch: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Header);
