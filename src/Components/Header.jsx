@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import { setInputSearch, setSearchHeader } from '../redux/action/index';
 
-function Header() {
+function Header(props) {
   const [filter, setFilter] = useState('');
   const [search, setSearch] = useState(false);
   const [inputFilter, setInputFilter] = useState('');
@@ -20,7 +22,17 @@ function Header() {
       setSearch(true);
     }
   };
-  console.log(inputFilter);
+
+  const setInputRedux = () => {
+    const { inputSearchDispatch, SearchDispatch } = props;
+    inputSearchDispatch(inputFilter);
+    SearchDispatch(filter);
+  };
+
+  useEffect(() => {
+
+  }, [filter]);
+
   return (
     <>
       <header>
@@ -83,7 +95,7 @@ function Header() {
         <button
           type="button"
           data-testid="exec-search-btn"
-          onClick={ () => console.log('teste') }
+          onClick={ () => setInputRedux() }
         >
           Busca
         </button>
@@ -93,10 +105,16 @@ function Header() {
   );
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  inputSearchDispatch: (input) => dispatch(setInputSearch(input)),
+  SearchDispatch: (search) => dispatch(setSearchHeader(search)),
+
+});
+
 Header.propTypes = {
   location: PropTypes.shape(
     { pathname: PropTypes.string },
   ).isRequired,
 };
 
-export default Header;
+export default connect(null, mapDispatchToProps)(Header);
