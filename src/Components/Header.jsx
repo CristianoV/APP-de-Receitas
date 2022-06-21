@@ -44,6 +44,8 @@ function Header(props) {
 
   return (
     <>
+      { filter.length > 1 && inputFilter === 'Letra'
+      && global.alert('Your search must have only 1 (one) character')}
       <header>
         <Link to="/profile">
           <img src={ profileIcon } alt="profile icon" />
