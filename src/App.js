@@ -5,10 +5,12 @@ import {
   Route,
 } from 'react-router-dom';
 import Login from './pages/Login';
+import Header from './Components/Header';
 
 function App() {
   return (
     <div>
+      <Header />
       <Switch>
         <Route exact path="/" render={ (props) => <Login { ...props } /> } />
       </Switch>
