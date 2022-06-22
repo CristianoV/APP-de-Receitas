@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import { setInputSearch,
   setReceitas, setSearchHeader,
   setNome, setLetra, setDrinks,
   setDrinksNome, setDrinksLetra } from '../redux/action/headerAction';
+import Card from './Card';
 
 function Header() {
   const [filter, setFilter] = useState('');
@@ -14,9 +15,6 @@ function Header() {
   const [inputFilter, setInputFilter] = useState('');
   const location = useLocation();
   const dispatch = useDispatch();
-  const redux = useSelector((state) => state.reducerHeader);
-  console.log(redux);
-  console.log(location.pathname);
 
   const handleFilter = ({ target }) => {
     const { value } = target;
@@ -138,6 +136,7 @@ function Header() {
               </button>
             </form>
           </>)}
+        <Card />
       </div>
     </>
   );
