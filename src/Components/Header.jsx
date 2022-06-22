@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import { setInputSearch,
   setReceitas, setSearchHeader,
   setNome, setLetra } from '../redux/action/headerAction';
 
-function Header(props) {
+function Header() {
   const [filter, setFilter] = useState('');
   const [search, setSearch] = useState(false);
   const [inputFilter, setInputFilter] = useState('');
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const redux = useSelector((state) => state.reducerHeader);
+  console.log(redux);
+  console.log(location);
 
   const handleFilter = ({ target }) => {
     const { value } = target;
@@ -26,17 +30,15 @@ function Header(props) {
   };
 
   const setInputRedux = () => {
-    const { inputSearchDispatch, SearchDispatch,
-      SearchReceitas, SearchNome, SearchLetra } = props;
-    inputSearchDispatch(inputFilter);
-    SearchDispatch(filter);
+    dispatch(setInputSearch(inputFilter));
+    dispatch(setSearchHeader(filter));
     switch (inputFilter) {
     case 'Ingredientes':
-      return SearchReceitas(filter);
+      return dispatch(setReceitas(filter));
     case 'Letra':
-      return SearchLetra(filter);
+      return dispatch(setLetra(filter));
     case 'Nome':
-      return SearchNome(filter);
+      return dispatch(setNome(filter));
     default:
       return null;
     }
@@ -64,75 +66,58 @@ function Header(props) {
         </div>
       </header>
       <div>
-        {search && (<input
-          type="text"
-          name=""
-          id=""
-          value={ filter }
-          onChange={ handleFilter }
-        />)}
+        {search && (
+          <>
+            <input
+              type="text"
+              name=""
+              id=""
+              value={ filter }
+              onChange={ handleFilter }
+            />
+            <form action="">
+              <label htmlFor="Ingredientes">
+                <input
+                  type="radio"
+                  name="searchInput"
+                  id="Ingredientes"
+                  onClick={ () => setInputFilter('Ingredientes') }
+                  data-testid="ingredient-search-radio"
+                />
+                Ingredientes
+              </label>
+              <label htmlFor="Nome">
+                <input
+                  type="radio"
+                  name="searchInput"
+                  id="Nome"
+                  onClick={ () => setInputFilter('Nome') }
+                  data-testid="name-search-radio"
+                />
+                Nome
+              </label>
+              <label htmlFor="Letra">
+                <input
+                  type="radio"
+                  name="searchInput"
+                  id="Letra"
+                  onClick={ () => setInputFilter('Letra') }
+                  data-testid="first-letter-search-radio"
+                />
+                Primeira Letra
+              </label>
+              <button
+                type="button"
+                data-testid="exec-search-btn"
+                onClick={ () => setInputRedux() }
+              >
+                Busca
+              </button>
+            </form>
+          </>)}
       </div>
-      <form action="">
-        <label htmlFor="Ingredientes">
-          <input
-            type="radio"
-            name="searchInput"
-            id="Ingredientes"
-            onClick={ () => setInputFilter('Ingredientes') }
-            data-testid="ingredient-search-radio"
-          />
-          Ingredientes
-        </label>
-        <label htmlFor="Nome">
-          <input
-            type="radio"
-            name="searchInput"
-            id="Nome"
-            onClick={ () => setInputFilter('Nome') }
-            data-testid="name-search-radio"
-          />
-          Nome
-        </label>
-        <label htmlFor="Letra">
-          <input
-            type="radio"
-            name="searchInput"
-            id="Letra"
-            onClick={ () => setInputFilter('Letra') }
-            data-testid="first-letter-search-radio"
-          />
-          Primeira Letra
-        </label>
-        <button
-          type="button"
-          data-testid="exec-search-btn"
-          onClick={ () => setInputRedux() }
-        >
-          Busca
-        </button>
-      </form>
-
     </>
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  inputSearchDispatch: (input) => dispatch(setInputSearch(input)),
-  SearchDispatch: (search) => dispatch(setSearchHeader(search)),
-  SearchReceitas: (search) => dispatch(setReceitas(search)),
-  SearchNome: (search) => dispatch(setNome(search)),
-  SearchLetra: (search) => dispatch(setLetra(search)),
-});
-
-Header.propTypes = {
-  location: PropTypes.shape(
-    { pathname: PropTypes.string },
-  ).isRequired,
-  inputSearchDispatch: PropTypes.func.isRequired,
-  SearchDispatch: PropTypes.func.isRequired,
-  SearchReceitas: PropTypes.func.isRequired,
-  SearchNome: PropTypes.func.isRequired,
-  SearchLetra: PropTypes.func.isRequired,
-};
-
-export default connect(null, mapDispatchToProps)(Header);
+export default Header;
