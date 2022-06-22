@@ -1,19 +1,36 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 function Card() {
-  const redux = useSelector((state) => state.reducerHeader.drinks);
-  console.log(redux);
+  const drinks = useSelector((state) => state.reducerHeader.drinks);
+  const foods = useSelector((state) => state.reducerHeader.meals);
+  const location = useLocation();
+  console.log(drinks);
   const MAX_INDEX_CARD = 12;
   return (
     <div>
-      { redux && redux.map((teste, index) => (
-        <div key={ teste.idDrink }>
+      { drinks && location.pathname === '/drinks' && drinks.map((receitas, index) => (
+        <div key={ receitas.idDrink }>
           {index < MAX_INDEX_CARD && (
             <div data-testid={ `${index}-recipe-card` }>
-              <h1 data-testid={ `${index}-card-name` }>{teste.strDrink}</h1>
+              <h1 data-testid={ `${index}-card-name` }>{receitas.strDrink}</h1>
               <img
-                src={ teste.strDrinkThumb }
+                src={ receitas.strDrinkThumb }
+                alt=""
+                data-testid={ `${index}-card-img` }
+              />
+            </div>
+          )}
+        </div>
+      ))}
+      { foods && location.pathname === '/foods' && foods.map((receitas, index) => (
+        <div key={ receitas.idDrink }>
+          {index < MAX_INDEX_CARD && (
+            <div data-testid={ `${index}-recipe-card` }>
+              <h1 data-testid={ `${index}-card-name` }>{receitas.strMeal}</h1>
+              <img
+                src={ receitas.strMealThumb }
                 alt=""
                 data-testid={ `${index}-card-img` }
               />
