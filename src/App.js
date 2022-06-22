@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import Login from './pages/Login';
 import Header from './Components/Header';
+import Footer from './Components/Footer';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Switch>
         <Route exact path="/" render={ (props) => <Login { ...props } /> } />
       </Switch>
+      <Footer />
     </div>
   );
 }
