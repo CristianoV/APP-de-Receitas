@@ -5,7 +5,8 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import { setInputSearch,
   setReceitas, setSearchHeader,
-  setNome, setLetra } from '../redux/action/headerAction';
+  setNome, setLetra, setDrinks,
+  setDrinksNome, setDrinksLetra } from '../redux/action/headerAction';
 
 function Header() {
   const [filter, setFilter] = useState('');
@@ -15,7 +16,7 @@ function Header() {
   const dispatch = useDispatch();
   const redux = useSelector((state) => state.reducerHeader);
   console.log(redux);
-  console.log(location);
+  console.log(location.pathname);
 
   const handleFilter = ({ target }) => {
     const { value } = target;
@@ -29,9 +30,7 @@ function Header() {
     }
   };
 
-  const setInputRedux = () => {
-    dispatch(setInputSearch(inputFilter));
-    dispatch(setSearchHeader(filter));
+  const setInputReduxFoods = () => {
     switch (inputFilter) {
     case 'Ingredientes':
       return dispatch(setReceitas(filter));
@@ -41,6 +40,30 @@ function Header() {
       return dispatch(setNome(filter));
     default:
       return null;
+    }
+  };
+
+  const setInputReduxDrinks = () => {
+    switch (inputFilter) {
+    case 'Ingredientes':
+      return dispatch(setDrinks(filter));
+    case 'Letra':
+      return dispatch(setDrinksLetra(filter));
+    case 'Nome':
+      return dispatch(setDrinksNome(filter));
+    default:
+      return null;
+    }
+  };
+
+  const setInputRedux = () => {
+    dispatch(setInputSearch(inputFilter));
+    dispatch(setSearchHeader(filter));
+    const { pathname } = location;
+    if (pathname === '/foods') {
+      setInputReduxFoods();
+    } if (pathname === '/drinks') {
+      setInputReduxDrinks();
     }
   };
 
