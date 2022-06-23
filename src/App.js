@@ -7,6 +7,7 @@ import {
 import Login from './pages/Login';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import Mainpage from './pages/MainPage';
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" render={ (props) => <Login { ...props } /> } />
+        <Route exact path="/foods" component={ Mainpage } />
+        <Route exact path="/drinks" component={ Mainpage } />
       </Switch>
       <Footer />
     </div>

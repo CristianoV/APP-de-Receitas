@@ -7,7 +7,6 @@ import { setInputSearch,
   setReceitas, setSearchHeader,
   setNome, setLetra, setDrinks,
   setDrinksNome, setDrinksLetra } from '../redux/action/headerAction';
-import Card from './Card';
 
 function Header() {
   const [filter, setFilter] = useState('');
@@ -144,7 +143,6 @@ function Header() {
                   </button>
                 </form>
               </>)}
-            <Card />
           </div>
         </div>
       )}
