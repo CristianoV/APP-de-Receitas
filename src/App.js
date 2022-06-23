@@ -7,6 +7,7 @@ import {
 import Login from './pages/Login';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" render={ (props) => <Login { ...props } /> } />
+        <Route exact path="/profile" component={ Profile } />
       </Switch>
       <Footer />
     </div>
