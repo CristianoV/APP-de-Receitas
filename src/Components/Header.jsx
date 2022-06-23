@@ -44,6 +44,7 @@ function Header() {
   };
 
   const setInputReduxDrinks = () => {
+    dispatch(actionCleanFilterCAtegory());
     switch (inputFilter) {
     case 'Ingredientes':
       return dispatch(setDrinks(filter));

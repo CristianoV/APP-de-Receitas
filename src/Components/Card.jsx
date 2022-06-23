@@ -6,13 +6,14 @@ function Card() {
   const drinks = useSelector((state) => state.reducerHeader.drinks);
   const foods = useSelector((state) => state.reducerHeader.meals);
   const foodsCategory = useSelector((state) => state.reducerMainPage.Receitas);
+  console.log(foodsCategory.length);
   const location = useLocation();
   const MAX_INDEX_CARD = 12;
   return (
     <div>
-      { foodsCategory && location.pathname === '/drinks'
-      && foodsCategory.map((receitas, index) => (
-        <div key={ receitas.idDrink }>
+      { foodsCategory.drinks && location.pathname === '/drinks'
+      && foodsCategory.drinks.map((receitas, index) => (
+        <div key={ index }>
           {index < MAX_INDEX_CARD && (
             <div data-testid={ `${index}-recipe-card` }>
               <h1 data-testid={ `${index}-card-name` }>{receitas.strDrink}</h1>
@@ -25,9 +26,9 @@ function Card() {
           )}
         </div>
       ))}
-      { drinks && location.pathname === '/drinks' && !foodsCategory.length
+      { drinks && location.pathname === '/drinks' && foodsCategory.length === 0
        && drinks.map((receitas, index) => (
-         <div key={ receitas.idDrink }>
+         <div key={ index }>
            {index < MAX_INDEX_CARD && (
              <div data-testid={ `${index}-recipe-card` }>
                <h1 data-testid={ `${index}-card-name` }>{receitas.strDrink}</h1>
@@ -40,9 +41,9 @@ function Card() {
            )}
          </div>
        ))}
-      { foodsCategory && location.pathname === '/foods'
-      && foodsCategory.map((receitas, index) => (
-        <div key={ receitas.idDrink }>
+      { foodsCategory.meals && location.pathname === '/foods'
+      && foodsCategory.meals.map((receitas, index) => (
+        <div key={ index }>
           {index < MAX_INDEX_CARD && (
             <div data-testid={ `${index}-recipe-card` }>
               <h1 data-testid={ `${index}-card-name` }>{receitas.strMeal}</h1>
@@ -55,9 +56,9 @@ function Card() {
           )}
         </div>
       ))}
-      { foods && location.pathname === '/foods' && !foodsCategory.length
+      { foods && location.pathname === '/foods' && foodsCategory.length === 0
        && foods.map((receitas, index) => (
-         <div key={ receitas.idDrink }>
+         <div key={ index }>
            {index < MAX_INDEX_CARD && (
              <div data-testid={ `${index}-recipe-card` }>
                <h1 data-testid={ `${index}-card-name` }>{receitas.strMeal}</h1>

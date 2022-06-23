@@ -24,6 +24,22 @@ export const actionFilterCAtegory = (payload) => ({
   payload,
 });
 
+export const setFoodsCategory = (element) => async (dispatch) => {
+  const request = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?c=${element}`,
+  );
+  const json = await request.json();
+  dispatch(actionFilterCAtegory(json));
+};
+
+export const setDrinksCategory = (element) => async (dispatch) => {
+  const request = await fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${element}`,
+  );
+  const json = await request.json();
+  dispatch(actionFilterCAtegory(json));
+};
+
 export const actionCleanFilterCAtegory = () => ({
   type: 'SET_FILTER_CATEGORY',
   payload: [],
