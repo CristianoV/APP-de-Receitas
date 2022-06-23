@@ -15,6 +15,7 @@ function Header() {
   const [inputFilter, setInputFilter] = useState('');
   const location = useLocation();
   const dispatch = useDispatch();
+  const url = location.pathname.split('/')[1];
 
   const handleFilter = ({ target }) => {
     const { value } = target;
@@ -66,79 +67,88 @@ function Header() {
   };
 
   return (
-    <>
-      { filter.length > 1 && inputFilter === 'Letra'
-      && global.alert('Your search must have only 1 (one) character')}
-      <header>
-        <Link to="/profile">
-          <img src={ profileIcon } alt="profile icon" />
-        </Link>
-        <h1>
-          TrybeTeste
-        </h1>
+    <div>
+      { location.pathname !== '/'
+      && (
         <div>
-          <button
-            type="button"
-            data-testid="search-input"
-            onClick={ () => buttonSearch() }
-          >
-            <img src={ searchIcon } alt="profile icon" />
-          </button>
-        </div>
-      </header>
-      <div>
-        {search && (
-          <>
-            <input
-              type="text"
-              name=""
-              id=""
-              value={ filter }
-              onChange={ handleFilter }
-            />
-            <form action="">
-              <label htmlFor="Ingredientes">
-                <input
-                  type="radio"
-                  name="searchInput"
-                  id="Ingredientes"
-                  onClick={ () => setInputFilter('Ingredientes') }
-                  data-testid="ingredient-search-radio"
-                />
-                Ingredientes
-              </label>
-              <label htmlFor="Nome">
-                <input
-                  type="radio"
-                  name="searchInput"
-                  id="Nome"
-                  onClick={ () => setInputFilter('Nome') }
-                  data-testid="name-search-radio"
-                />
-                Nome
-              </label>
-              <label htmlFor="Letra">
-                <input
-                  type="radio"
-                  name="searchInput"
-                  id="Letra"
-                  onClick={ () => setInputFilter('Letra') }
-                  data-testid="first-letter-search-radio"
-                />
-                Primeira Letra
-              </label>
+          { filter.length > 1 && inputFilter === 'Letra'
+           && global.alert('Your search must have only 1 (one) character')}
+          <header>
+            <Link to="/profile">
+              <img src={ profileIcon } data-testid="profile-top-btn" alt="profile icon" />
+            </Link>
+            <h1 data-testid="page-title">
+              {url[0].toUpperCase() + url.slice(1).toLowerCase()}
+            </h1>
+            <div>
               <button
                 type="button"
-                data-testid="exec-search-btn"
-                onClick={ () => setInputRedux() }
+                onClick={ () => buttonSearch() }
               >
-                Busca
+                <img
+                  src={ searchIcon }
+                  data-testid="search-top-btn"
+                  alt="profile icon"
+                />
               </button>
-            </form>
-          </>)}
-        <Card />
-      </div>
-    </>
+            </div>
+          </header>
+          <div>
+            {search && (
+              <>
+                <input
+                  type="text"
+                  name=""
+                  data-testid="search-input"
+                  id=""
+                  value={ filter }
+                  onChange={ handleFilter }
+                />
+                <form action="">
+                  <label htmlFor="Ingredientes">
+                    <input
+                      type="radio"
+                      name="searchInput"
+                      id="Ingredientes"
+                      onClick={ () => setInputFilter('Ingredientes') }
+                      data-testid="ingredient-search-radio"
+                    />
+                    Ingredientes
+                  </label>
+                  <label htmlFor="Nome">
+                    <input
+                      type="radio"
+                      name="searchInput"
+                      id="Nome"
+                      onClick={ () => setInputFilter('Nome') }
+                      data-testid="name-search-radio"
+                    />
+                    Nome
+                  </label>
+                  <label htmlFor="Letra">
+                    <input
+                      type="radio"
+                      name="searchInput"
+                      id="Letra"
+                      onClick={ () => setInputFilter('Letra') }
+                      data-testid="first-letter-search-radio"
+                    />
+                    Primeira Letra
+                  </label>
+                  <button
+                    type="button"
+                    data-testid="exec-search-btn"
+                    onClick={ () => setInputRedux() }
+                  >
+                    Busca
+                  </button>
+                </form>
+              </>)}
+            <Card />
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
