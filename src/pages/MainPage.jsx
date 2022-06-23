@@ -42,7 +42,6 @@ function Mainpage() {
 
   const setRecipesCategory = ({ target }) => {
     const { name } = target;
-    console.log(name);
     if (location.pathname === '/foods') {
       return dispatch(setFoodsCategory(name));
     } if (location.pathname === '/drinks') {
