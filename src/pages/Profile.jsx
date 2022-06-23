@@ -20,7 +20,7 @@ function Profile() {
       </Link>
       <Link to="/favorite-recipes">
         <button
-          ata-testid="profile-favorite-btn"
+          data-testid="profile-favorite-btn"
           type="button"
         >
           Favorite Recipes
