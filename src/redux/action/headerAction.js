@@ -36,3 +36,27 @@ export const setLetra = (letra) => async (dispatch) => {
   const json = await request.json();
   dispatch(actionReceits(json));
 };
+
+export const setDrinks = (ingrediente) => async (dispatch) => {
+  const request = await fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingrediente}`,
+  );
+  const json = await request.json();
+  dispatch(actionReceits(json));
+};
+
+export const setDrinksNome = (nome) => async (dispatch) => {
+  const request = await fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${nome}`,
+  );
+  const json = await request.json();
+  dispatch(actionReceits(json));
+};
+
+export const setDrinksLetra = (letra) => async (dispatch) => {
+  const request = await fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letra}`,
+  );
+  const json = await request.json();
+  dispatch(actionReceits(json));
+};
