@@ -1,14 +1,18 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { actionCleanFilterCAtegory } from '../redux/action/mainPageAction';
 
 function Card() {
   const drinks = useSelector((state) => state.reducerHeader.drinks);
   const foods = useSelector((state) => state.reducerHeader.meals);
   const foodsCategory = useSelector((state) => state.reducerMainPage.Receitas);
-  console.log(foodsCategory.length);
   const location = useLocation();
   const MAX_INDEX_CARD = 12;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(actionCleanFilterCAtegory());
+  }, [location.pathname, dispatch]);
   return (
     <div>
       { foodsCategory.drinks && location.pathname === '/drinks'
