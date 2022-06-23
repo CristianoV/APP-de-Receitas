@@ -23,3 +23,8 @@ export const actionFilterCAtegory = (payload) => ({
   type: 'SET_FILTER_CATEGORY',
   payload,
 });
+
+export const actionCleanFilterCAtegory = () => ({
+  type: 'SET_FILTER_CATEGORY',
+  payload: [],
+});

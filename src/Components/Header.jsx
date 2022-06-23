@@ -7,6 +7,7 @@ import { setInputSearch,
   setReceitas, setSearchHeader,
   setNome, setLetra, setDrinks,
   setDrinksNome, setDrinksLetra } from '../redux/action/headerAction';
+import { actionCleanFilterCAtegory } from '../redux/action/mainPageAction';
 
 function Header() {
   const [filter, setFilter] = useState('');
@@ -29,6 +30,7 @@ function Header() {
   };
 
   const setInputReduxFoods = () => {
+    dispatch(actionCleanFilterCAtegory());
     switch (inputFilter) {
     case 'Ingredientes':
       return dispatch(setReceitas(filter));
