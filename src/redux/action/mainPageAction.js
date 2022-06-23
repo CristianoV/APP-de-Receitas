@@ -18,3 +18,8 @@ export const setFoodsMainPage = () => async (dispatch) => {
   const json = await request.json();
   dispatch(actionReceitsMainPage(json));
 };
+
+export const actionFilterCAtegory = (payload) => ({
+  type: 'SET_FILTER_CATEGORY',
+  payload,
+});
