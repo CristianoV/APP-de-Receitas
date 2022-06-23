@@ -10,7 +10,7 @@ function Profile() {
       <p data-testid="profile-email">
         {loggerUser}
       </p>
-      <Link to="/Done Recipes">
+      <Link to="/done-recipes">
         <button
           data-testid="profile-done-btn"
           type="button"
@@ -18,7 +18,7 @@ function Profile() {
           Done Recipes
         </button>
       </Link>
-      <Link to="/Favorite Recipes">
+      <Link to="/favorite-recipes">
         <button
           ata-testid="profile-favorite-btn"
           type="button"
@@ -26,11 +26,11 @@ function Profile() {
           Favorite Recipes
         </button>
       </Link>
-      <Link to="/Login">
+      <Link to="/">
         <button
           data-testid="profile-logout-btn"
           type="button"
-          onClick={ localStorage.clear() }
+          onClick={ () => localStorage.clear() }
         >
           Logout
         </button>
