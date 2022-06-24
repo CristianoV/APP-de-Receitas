@@ -8,8 +8,18 @@ export const setSearchHeader = (payload) => ({
   payload,
 });
 
-export const actionReceits = (payload) => ({
-  type: 'SET_INGREDIENTS',
+// export const actionReceits = (payload) => ({
+//   type: 'SET_INGREDIENTS',
+//   payload,
+// });
+
+export const actionReceitsMainPageFoods = (payload) => ({
+  type: 'SET_INGREDIENTS_FOODS',
+  payload,
+});
+
+export const actionReceitsMainPageDrinks = (payload) => ({
+  type: 'SET_INGREDIENTS_DRINKS',
   payload,
 });
 
@@ -18,7 +28,7 @@ export const setReceitas = (ingrediente) => async (dispatch) => {
     `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingrediente}`,
   );
   const json = await request.json();
-  dispatch(actionReceits(json));
+  dispatch(actionReceitsMainPageFoods(json));
 };
 
 export const setNome = (nome) => async (dispatch) => {
@@ -26,7 +36,7 @@ export const setNome = (nome) => async (dispatch) => {
     `https://www.themealdb.com/api/json/v1/1/search.php?s=${nome}`,
   );
   const json = await request.json();
-  dispatch(actionReceits(json));
+  dispatch(actionReceitsMainPageFoods(json));
 };
 
 export const setLetra = (letra) => async (dispatch) => {
@@ -34,7 +44,7 @@ export const setLetra = (letra) => async (dispatch) => {
     `https://www.themealdb.com/api/json/v1/1/search.php?f=${letra}`,
   );
   const json = await request.json();
-  dispatch(actionReceits(json));
+  dispatch(actionReceitsMainPageFoods(json));
 };
 
 export const setDrinks = (ingrediente) => async (dispatch) => {
@@ -42,7 +52,7 @@ export const setDrinks = (ingrediente) => async (dispatch) => {
     `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingrediente}`,
   );
   const json = await request.json();
-  dispatch(actionReceits(json));
+  dispatch(actionReceitsMainPageDrinks(json));
 };
 
 export const setDrinksNome = (nome) => async (dispatch) => {
@@ -50,7 +60,7 @@ export const setDrinksNome = (nome) => async (dispatch) => {
     `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${nome}`,
   );
   const json = await request.json();
-  dispatch(actionReceits(json));
+  dispatch(actionReceitsMainPageDrinks(json));
 };
 
 export const setDrinksLetra = (letra) => async (dispatch) => {
@@ -58,5 +68,5 @@ export const setDrinksLetra = (letra) => async (dispatch) => {
     `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letra}`,
   );
   const json = await request.json();
-  dispatch(actionReceits(json));
+  dispatch(actionReceitsMainPageDrinks(json));
 };

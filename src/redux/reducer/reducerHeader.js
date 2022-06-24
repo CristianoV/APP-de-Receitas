@@ -10,8 +10,10 @@ const reducerHeader = (state = INITIAL_STATE, action) => {
     return { ...state, input: action.payload };
   case 'SET_SEARCH':
     return { ...state, search: action.payload };
-  case 'SET_INGREDIENTS':
-    return { ...state, ...action.payload };
+  case 'SET_INGREDIENTS_FOODS':
+    return { ...state, Receitas: action.payload.meals };
+  case 'SET_INGREDIENTS_DRINKS':
+    return { ...state, Receitas: action.payload.drinks };
   default:
     return state;
   }

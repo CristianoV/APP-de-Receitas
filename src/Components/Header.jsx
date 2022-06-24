@@ -7,7 +7,7 @@ import { setInputSearch,
   setReceitas, setSearchHeader,
   setNome, setLetra, setDrinks,
   setDrinksNome, setDrinksLetra } from '../redux/action/headerAction';
-import Card from './Card';
+import { actionCleanFilterCAtegory } from '../redux/action/mainPageAction';
 
 function Header() {
   const [filter, setFilter] = useState('');
@@ -30,6 +30,7 @@ function Header() {
   };
 
   const setInputReduxFoods = () => {
+    dispatch(actionCleanFilterCAtegory());
     switch (inputFilter) {
     case 'Ingredientes':
       return dispatch(setReceitas(filter));
@@ -43,6 +44,7 @@ function Header() {
   };
 
   const setInputReduxDrinks = () => {
+    dispatch(actionCleanFilterCAtegory());
     switch (inputFilter) {
     case 'Ingredientes':
       return dispatch(setDrinks(filter));
@@ -81,20 +83,22 @@ function Header() {
               {url[0].toUpperCase() + url.slice(1).toLowerCase()}
             </h1>
             <div>
-              <button
-                type="button"
-                onClick={ () => buttonSearch() }
-              >
-                <img
-                  src={ searchIcon }
-                  data-testid="search-top-btn"
-                  alt="profile icon"
-                />
-              </button>
+              {location.pathname !== '/explore' && (
+                <button
+                  type="button"
+                  onClick={ () => buttonSearch() }
+                >
+                  <img
+                    src={ searchIcon }
+                    data-testid="search-top-btn"
+                    alt="profile icon"
+                  />
+                </button>
+              )}
             </div>
           </header>
           <div>
-            {search && (
+            {search && location.pathname !== '/explore' && (
               <>
                 <input
                   type="text"
@@ -144,7 +148,6 @@ function Header() {
                   </button>
                 </form>
               </>)}
-            <Card />
           </div>
         </div>
       )}

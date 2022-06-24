@@ -7,6 +7,7 @@ import {
 import Login from './pages/Login';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import Mainpage from './pages/MainPage';
 import Profile from './pages/Profile';
 
 function App() {
@@ -15,7 +16,9 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" render={ (props) => <Login { ...props } /> } />
-        <Route exact path="/profile" component={ Profile } />
+        <Route exact path="/foods" component={ Mainpage } />
+        <Route exact path="/drinks" component={ Mainpage } />
+        <Route path="/profile" component={ Profile } />
       </Switch>
       <Footer />
     </div>
