@@ -18,7 +18,7 @@ function App() {
         <Route exact path="/" render={ (props) => <Login { ...props } /> } />
         <Route exact path="/foods" component={ Mainpage } />
         <Route exact path="/drinks" component={ Mainpage } />
-        <Route exact path="/profile" component={ Profile } />
+        <Route path="/profile" component={ Profile } />
       </Switch>
       <Footer />
     </div>

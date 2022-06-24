@@ -83,20 +83,22 @@ function Header() {
               {url[0].toUpperCase() + url.slice(1).toLowerCase()}
             </h1>
             <div>
-              <button
-                type="button"
-                onClick={ () => buttonSearch() }
-              >
-                <img
-                  src={ searchIcon }
-                  data-testid="search-top-btn"
-                  alt="profile icon"
-                />
-              </button>
+              {location.pathname !== '/explore' && (
+                <button
+                  type="button"
+                  onClick={ () => buttonSearch() }
+                >
+                  <img
+                    src={ searchIcon }
+                    data-testid="search-top-btn"
+                    alt="profile icon"
+                  />
+                </button>
+              )}
             </div>
           </header>
           <div>
-            {search && (
+            {search && location.pathname !== '/explore' && (
               <>
                 <input
                   type="text"
