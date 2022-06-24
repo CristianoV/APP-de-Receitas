@@ -20,7 +20,7 @@ function App() {
   // TODO: Adicionar Header e Footer nas páginas principais Foods e Drinks
   return (
     <div>
-          <Header />
+      <Header />
       <Switch>
         <Route exact path="/" render={ (props) => <Login { ...props } /> } />
         <Route exact path="/foods" component={ Mainpage } />
@@ -33,7 +33,7 @@ function App() {
         <Route exact path="/explore/foods/nationalities" component={ FoodsNacionality } />
         <Route path="/profile" component={ Profile } />
       </Switch>
-        <Footer />
+      <Footer />
     </div>
   );
 }
