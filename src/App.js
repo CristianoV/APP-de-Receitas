@@ -13,7 +13,6 @@ import FoodsIngredients from './pages/ExplorePages/FoodsIngredients';
 import DrinksIngredients from './pages/ExplorePages/DrinksIngredients';
 import FoodsNacionality from './pages/ExplorePages/FoodsNacionality';
 import Header from './Components/Header';
-import Footer from './Components/Footer';
 import Profile from './pages/Profile';
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
         <Route exact path="/explore/foods/nationalities" component={ FoodsNacionality } />
         <Route path="/profile" component={ Profile } />
       </Switch>
-      <Footer />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Card from '../Components/Card';
+import Footer from '../Components/Footer';
 import { setDrinksMainPage,
   setFoodsMainPage, setFoodsCategory,
   setDrinksCategory } from '../redux/action/mainPageAction';
@@ -65,6 +66,7 @@ function Mainpage() {
         ))
       }
       <Card />
+      <Footer />
     </div>
   );
 }
