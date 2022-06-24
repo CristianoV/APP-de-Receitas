@@ -1,7 +1,6 @@
 const INITIAL_STATE = {
   input: '',
   search: '',
-  Receitas: [],
 };
 
 const reducerHeader = (state = INITIAL_STATE, action) => {
