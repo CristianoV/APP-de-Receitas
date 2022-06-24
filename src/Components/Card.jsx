@@ -4,9 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { actionCleanFilterCAtegory } from '../redux/action/mainPageAction';
 
 function Card() {
-  const drinks = useSelector((state) => state.reducerHeader.drinks);
-  const foods = useSelector((state) => state.reducerHeader.meals);
-  const foodsCategory = useSelector((state) => state.reducerMainPage.Receitas);
+  const Receitas = useSelector((state) => state.reducerHeader.Receitas);
+  const foodsCategory = useSelector((state) => state.reducerMainPage.ReceitasFiltradas);
   const location = useLocation();
   const MAX_INDEX_CARD = 12;
   const dispatch = useDispatch();
@@ -15,8 +14,8 @@ function Card() {
   }, [location.pathname, dispatch]);
   return (
     <div>
-      { foodsCategory.drinks && location.pathname === '/drinks'
-      && foodsCategory.drinks.map((receitas, index) => (
+      { foodsCategory && location.pathname === '/drinks'
+      && foodsCategory.map((receitas, index) => (
         <div key={ index }>
           {index < MAX_INDEX_CARD && (
             <div data-testid={ `${index}-recipe-card` }>
@@ -30,8 +29,8 @@ function Card() {
           )}
         </div>
       ))}
-      { drinks && location.pathname === '/drinks' && foodsCategory.length === 0
-       && drinks.map((receitas, index) => (
+      { Receitas && location.pathname === '/drinks' && foodsCategory
+       && Receitas.map((receitas, index) => (
          <div key={ index }>
            {index < MAX_INDEX_CARD && (
              <div data-testid={ `${index}-recipe-card` }>
@@ -45,8 +44,8 @@ function Card() {
            )}
          </div>
        ))}
-      { foodsCategory.meals && location.pathname === '/foods'
-      && foodsCategory.meals.map((receitas, index) => (
+      { foodsCategory && location.pathname === '/foods'
+      && foodsCategory.map((receitas, index) => (
         <div key={ index }>
           {index < MAX_INDEX_CARD && (
             <div data-testid={ `${index}-recipe-card` }>
@@ -60,8 +59,8 @@ function Card() {
           )}
         </div>
       ))}
-      { foods && location.pathname === '/foods' && foodsCategory.length === 0
-       && foods.map((receitas, index) => (
+      { Receitas && location.pathname === '/foods' && foodsCategory
+       && Receitas.map((receitas, index) => (
          <div key={ index }>
            {index < MAX_INDEX_CARD && (
              <div data-testid={ `${index}-recipe-card` }>
