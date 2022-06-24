@@ -1,23 +1,30 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { actionCleanFilterCAtegory } from '../redux/action/mainPageAction';
 
 function Card() {
-  const drinks = useSelector((state) => state.reducerHeader.drinks);
-  const foods = useSelector((state) => state.reducerHeader.meals);
-  const foodsCategory = useSelector((state) => state.reducerMainPage.Receitas);
-  const location = useLocation();
+  const Receitas = useSelector((state) => state.reducerHeader.Receitas);
+  const foodsCategory = useSelector((state) => state.reducerMainPage.ReceitasFiltradas);
+  const { pathname } = useLocation();
   const MAX_INDEX_CARD = 12;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(actionCleanFilterCAtegory());
+  }, [pathname, dispatch]);
   return (
     <div>
-      { foodsCategory && location.pathname === '/drinks'
+      { foodsCategory
       && foodsCategory.map((receitas, index) => (
-        <div key={ receitas.idDrink }>
+        <div key={ index }>
           {index < MAX_INDEX_CARD && (
             <div data-testid={ `${index}-recipe-card` }>
-              <h1 data-testid={ `${index}-card-name` }>{receitas.strDrink}</h1>
+              <h1 data-testid={ `${index}-card-name` }>
+                { pathname === '/foods' ? receitas.strMeal : receitas.strDrink}
+              </h1>
               <img
-                src={ receitas.strDrinkThumb }
+                src={ pathname === '/foods'
+                  ? receitas.strMealThumb : receitas.strDrinkThumb }
                 alt=""
                 data-testid={ `${index}-card-img` }
               />
@@ -25,44 +32,17 @@ function Card() {
           )}
         </div>
       ))}
-      { drinks && location.pathname === '/drinks' && !foodsCategory.length
-       && drinks.map((receitas, index) => (
-         <div key={ receitas.idDrink }>
+      { Receitas && foodsCategory
+       && Receitas.map((receitas, index) => (
+         <div key={ index }>
            {index < MAX_INDEX_CARD && (
              <div data-testid={ `${index}-recipe-card` }>
-               <h1 data-testid={ `${index}-card-name` }>{receitas.strDrink}</h1>
+               <h1 data-testid={ `${index}-card-name` }>
+                 { pathname === '/foods' ? receitas.strMeal : receitas.strDrink}
+               </h1>
                <img
-                 src={ receitas.strDrinkThumb }
-                 alt=""
-                 data-testid={ `${index}-card-img` }
-               />
-             </div>
-           )}
-         </div>
-       ))}
-      { foodsCategory && location.pathname === '/foods'
-      && foodsCategory.map((receitas, index) => (
-        <div key={ receitas.idDrink }>
-          {index < MAX_INDEX_CARD && (
-            <div data-testid={ `${index}-recipe-card` }>
-              <h1 data-testid={ `${index}-card-name` }>{receitas.strMeal}</h1>
-              <img
-                src={ receitas.strMealThumb }
-                alt=""
-                data-testid={ `${index}-card-img` }
-              />
-            </div>
-          )}
-        </div>
-      ))}
-      { foods && location.pathname === '/foods' && !foodsCategory.length
-       && foods.map((receitas, index) => (
-         <div key={ receitas.idDrink }>
-           {index < MAX_INDEX_CARD && (
-             <div data-testid={ `${index}-recipe-card` }>
-               <h1 data-testid={ `${index}-card-name` }>{receitas.strMeal}</h1>
-               <img
-                 src={ receitas.strMealThumb }
+                 src={ pathname === '/foods'
+                   ? receitas.strMealThumb : receitas.strDrinkThumb }
                  alt=""
                  data-testid={ `${index}-card-img` }
                />

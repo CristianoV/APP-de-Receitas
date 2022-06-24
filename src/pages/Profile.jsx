@@ -3,12 +3,18 @@ import { Link } from 'react-router-dom';
 
 function Profile() {
   const loggedEmail = localStorage.getItem('user');
-  const loggerUser = JSON.parse(loggedEmail).email;
+
+  const user = () => {
+    if (loggedEmail) {
+      return JSON.parse(loggedEmail).email;
+    }
+    return '';
+  };
 
   return (
     <div>
       <p data-testid="profile-email">
-        {loggerUser}
+        {user()}
       </p>
       <Link to="/done-recipes">
         <button

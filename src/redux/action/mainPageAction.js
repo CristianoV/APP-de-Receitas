@@ -1,5 +1,10 @@
-export const actionReceitsMainPage = (payload) => ({
-  type: 'SET_INGREDIENTS',
+export const actionReceitsMainPageFoods = (payload) => ({
+  type: 'SET_INGREDIENTS_FOODS',
+  payload,
+});
+
+export const actionReceitsMainPageDrinks = (payload) => ({
+  type: 'SET_INGREDIENTS_DRINKS',
   payload,
 });
 
@@ -8,7 +13,7 @@ export const setDrinksMainPage = () => async (dispatch) => {
     'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
   );
   const json = await request.json();
-  dispatch(actionReceitsMainPage(json));
+  dispatch(actionReceitsMainPageDrinks(json));
 };
 
 export const setFoodsMainPage = () => async (dispatch) => {
@@ -16,15 +21,36 @@ export const setFoodsMainPage = () => async (dispatch) => {
     'https://www.themealdb.com/api/json/v1/1/search.php?s=',
   );
   const json = await request.json();
-  dispatch(actionReceitsMainPage(json));
+  dispatch(actionReceitsMainPageFoods(json));
 };
 
-export const actionFilterCAtegory = (payload) => ({
-  type: 'SET_FILTER_CATEGORY',
+export const actionFilterCAtegoryFoods = (payload) => ({
+  type: 'SET_FILTER_CATEGORY_FOODS',
   payload,
 });
 
+export const actionFilterCAtegoryDrinks = (payload) => ({
+  type: 'SET_FILTER_CATEGORY_DRINKS',
+  payload,
+});
+
+export const setFoodsCategory = (element) => async (dispatch) => {
+  const request = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?c=${element}`,
+  );
+  const json = await request.json();
+  dispatch(actionFilterCAtegoryFoods(json));
+};
+
+export const setDrinksCategory = (element) => async (dispatch) => {
+  const request = await fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${element}`,
+  );
+  const json = await request.json();
+  dispatch(actionFilterCAtegoryDrinks(json));
+};
+
 export const actionCleanFilterCAtegory = () => ({
-  type: 'SET_FILTER_CATEGORY',
+  type: 'SET_CLEAN_CATEGORY',
   payload: [],
 });

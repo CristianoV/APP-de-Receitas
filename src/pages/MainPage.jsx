@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Card from '../Components/Card';
 import { setDrinksMainPage,
-  setFoodsMainPage,
-  actionFilterCAtegory } from '../redux/action/mainPageAction';
+  setFoodsMainPage, setFoodsCategory,
+  setDrinksCategory } from '../redux/action/mainPageAction';
 
 function Mainpage() {
-  const drinks = useSelector((state) => state.reducerHeader.drinks);
-  const foods = useSelector((state) => state.reducerHeader.meals);
   const dispatch = useDispatch();
   const location = useLocation();
   const [category, setCategory] = useState([]);
@@ -32,7 +30,7 @@ function Mainpage() {
       }
     };
     catgApi();
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (location.pathname === '/foods') {
@@ -42,28 +40,25 @@ function Mainpage() {
     }
   }, [dispatch, location.pathname]);
 
-  const filterClick = (cat) => {
+  const setRecipesCategory = ({ target }) => {
+    const { name } = target;
     if (location.pathname === '/foods') {
-      const filted = foods.filter((food) => (
-        food.strCategory === cat
-      ));
-      dispatch(actionFilterCAtegory(filted));
-    } else {
-      const filted = drinks.filter((drink) => (drink.strCategory === cat));
-      dispatch(actionFilterCAtegory(filted));
+      return dispatch(setFoodsCategory(name));
+    } if (location.pathname === '/drinks') {
+      return dispatch(setDrinksCategory(name));
     }
   };
 
   return (
     <div>
       {
-        category && category.map((cat, index) => (
+        category && category.map((cat) => (
           <button
             type="button"
-            key={ index }
+            key={ cat }
             data-testid={ `${cat}-category-filter` }
             name={ cat }
-            onClick={ () => filterClick(cat) }
+            onClick={ (e) => setRecipesCategory(e) }
           >
             {cat}
           </button>
