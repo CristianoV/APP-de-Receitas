@@ -32,7 +32,7 @@ function Card() {
           )}
         </div>
       ))}
-      { Receitas && foodsCategory
+      { Receitas && !foodsCategory.length
        && Receitas.map((receitas, index) => (
          <div key={ index }>
            {index < MAX_INDEX_CARD && (
