@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
@@ -19,6 +19,7 @@ function Header() {
   const dispatch = useDispatch();
   const url = location.pathname.split('/')[1];
   const Receitas = useSelector((state) => state.reducerHeader.Receitas);
+  const history = useHistory();
 
   const handleFilter = ({ target }) => {
     const { value } = target;
@@ -72,11 +73,22 @@ function Header() {
   };
 
   useEffect(() => {
+    if (Receitas !== null) {
+      if (Receitas.length === 1 && Receitas[0].idMeal) {
+        history.push(`/foods/${Receitas[0].idMeal}`);
+      }
+      if (Receitas.length === 1 && Receitas[0].idDrink) {
+        history.push(`/drinks/${Receitas[0].idDrink}`);
+      }
+    }
+  },
+  [Receitas, history, location.pathname]);
+
+  useEffect(() => {
     if (Receitas === null) {
       if (location.pathname === '/foods') {
         dispatch(setFoodsMainPage());
       } else if (location.pathname === '/drinks') {
-        console.log('teste');
         dispatch(setDrinksMainPage());
       }
     }
