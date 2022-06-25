@@ -47,12 +47,14 @@ function Mainpage() {
     const { name } = target;
     if (location.pathname === '/foods') {
       if (categoryAtTheTime === name) {
+        setCategoryAtTheTime('');
         return dispatch(actionCleanFilterCAtegory());
       }
       setCategoryAtTheTime(name);
       return dispatch(setFoodsCategory(name));
     } if (location.pathname === '/drinks') {
       if (categoryAtTheTime === name) {
+        setCategoryAtTheTime('');
         return dispatch(actionCleanFilterCAtegory());
       }
       setCategoryAtTheTime(name);
@@ -62,6 +64,14 @@ function Mainpage() {
 
   return (
     <div>
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        name="All"
+        onClick={ () => dispatch(actionCleanFilterCAtegory()) }
+      >
+        All
+      </button>
       {
         category && category.map((cat) => (
           <button
