@@ -5,12 +5,14 @@ import Card from '../Components/Card';
 import Footer from '../Components/Footer';
 import { setDrinksMainPage,
   setFoodsMainPage, setFoodsCategory,
-  setDrinksCategory } from '../redux/action/mainPageAction';
+  setDrinksCategory,
+  actionCleanFilterCAtegory } from '../redux/action/mainPageAction';
 
 function Mainpage() {
   const dispatch = useDispatch();
   const location = useLocation();
   const [category, setCategory] = useState([]);
+  const [categoryAtTheTime, setCategoryAtTheTime] = useState([]);
 
   useEffect(() => {
     const catgApi = async () => {
@@ -44,14 +46,32 @@ function Mainpage() {
   const setRecipesCategory = ({ target }) => {
     const { name } = target;
     if (location.pathname === '/foods') {
+      if (categoryAtTheTime === name) {
+        setCategoryAtTheTime('');
+        return dispatch(actionCleanFilterCAtegory());
+      }
+      setCategoryAtTheTime(name);
       return dispatch(setFoodsCategory(name));
     } if (location.pathname === '/drinks') {
+      if (categoryAtTheTime === name) {
+        setCategoryAtTheTime('');
+        return dispatch(actionCleanFilterCAtegory());
+      }
+      setCategoryAtTheTime(name);
       return dispatch(setDrinksCategory(name));
     }
   };
 
   return (
     <div>
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        name="All"
+        onClick={ () => dispatch(actionCleanFilterCAtegory()) }
+      >
+        All
+      </button>
       {
         category && category.map((cat) => (
           <button

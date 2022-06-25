@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import { setInputSearch,
   setReceitas, setSearchHeader,
   setNome, setLetra, setDrinks,
   setDrinksNome, setDrinksLetra } from '../redux/action/headerAction';
-import { actionCleanFilterCAtegory } from '../redux/action/mainPageAction';
+import { actionCleanFilterCAtegory,
+  setDrinksMainPage,
+  setFoodsMainPage } from '../redux/action/mainPageAction';
 
 function Header() {
   const [filter, setFilter] = useState('');
@@ -16,6 +18,8 @@ function Header() {
   const location = useLocation();
   const dispatch = useDispatch();
   const url = location.pathname.split('/')[1];
+  const Receitas = useSelector((state) => state.reducerHeader.Receitas);
+  const history = useHistory();
 
   const handleFilter = ({ target }) => {
     const { value } = target;
@@ -68,6 +72,28 @@ function Header() {
     }
   };
 
+  useEffect(() => {
+    if (Receitas !== null) {
+      if (Receitas.length === 1 && Receitas[0].idMeal) {
+        history.push(`/foods/${Receitas[0].idMeal}`);
+      }
+      if (Receitas.length === 1 && Receitas[0].idDrink) {
+        history.push(`/drinks/${Receitas[0].idDrink}`);
+      }
+    }
+  },
+  [Receitas, history, location.pathname]);
+
+  useEffect(() => {
+    if (Receitas === null) {
+      if (location.pathname === '/foods') {
+        dispatch(setFoodsMainPage());
+      } else if (location.pathname === '/drinks') {
+        dispatch(setDrinksMainPage());
+      }
+    }
+  }, [dispatch, location.pathname, Receitas]);
+
   return (
     <div>
       { location.pathname !== '/'
@@ -75,6 +101,9 @@ function Header() {
         <div>
           { filter.length > 1 && inputFilter === 'Letra'
            && global.alert('Your search must have only 1 (one) character')}
+          { Receitas === null
+           && (global.alert('Sorry, we haven\'t found any recipes for these filters.')
+           )}
           <header>
             <Link to="/profile">
               <img src={ profileIcon } data-testid="profile-top-btn" alt="profile icon" />
