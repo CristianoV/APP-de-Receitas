@@ -29,6 +29,10 @@ function App() {
           path="/foods/:id"
           render={ (props) => <DetailsPage { ...props } /> }
         />
+        <Route
+          path="/drinks/:id"
+          render={ (props) => <DetailsPage { ...props } /> }
+        />
         <Route exact path="/explore" component={ Explore } />
         <Route exact path="/explore/drinks" component={ ExploreDrinks } />
         <Route exact path="/explore/foods" component={ ExploreFoods } />

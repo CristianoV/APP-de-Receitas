@@ -3,17 +3,18 @@ import propTypes from 'prop-types';
 import ShareIcon from '../images/shareIcon.svg';
 import FavIcon from '../images/whiteHeartIcon.svg';
 
-export default function CardsDetails({ useRecipe, useIngredients }) {
+export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
+  console.log(useRecipe);
   return (
     <div>
-
       <div>
         <img
-          src={ useRecipe.strMealThumb }
+          src={ useRecipe.strDrinkThumb }
           alt="Drink"
           data-testid="recipe-photo"
         />
-        <h1 data-testid="recipe-title">{ useRecipe.strMeal }</h1>
+        <h1 data-testid="recipe-title">{useRecipe.strDrink}</h1>
+        <p>{useRecipe.strAlcoholic}</p>
         <img
           src={ ShareIcon }
           alt="Share Button"
@@ -50,21 +51,11 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
       <div>
         <p data-testid="instructions">{useRecipe.strInstructions}</p>
       </div>
-
-      <div>
-        <iframe
-          title={ useRecipe.strMeal }
-          width="420"
-          height="315"
-          src={ useRecipe.strYoutube }
-          data-testid="video"
-        />
-      </div>
     </div>
   );
 }
 
-CardsDetails.propTypes = {
+DrinkCardsDetails.propTypes = {
   recipeThumb: propTypes.string,
   recipeName: propTypes.string,
   index: propTypes.number,
