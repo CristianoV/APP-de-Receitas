@@ -1,5 +1,12 @@
-export function handleShare() {
-  console.log('share');
+export async function handleShare(urlPage, setUrlPage) {
+  // https://web.dev/i18n/pt/async-clipboard/
+  try {
+    await navigator.clipboard.writeText(urlPage);
+    console.log('Link copied!');
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+  }
+  setUrlPage(true);
 }
 
 export function handleFavorite() {

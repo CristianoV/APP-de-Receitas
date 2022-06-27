@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import propTypes from 'prop-types';
 import ShareIcon from '../images/shareIcon.svg';
 import FavIcon from '../images/whiteHeartIcon.svg';
@@ -6,6 +7,9 @@ import { handleShare, handleFavorite, handleStarRecipe } from '../utils/useFunct
 
 export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
   console.log(useRecipe);
+  const [useUrlPage, setUrlPage] = useState(false);
+  const { pathname } = useLocation();
+  const urlPage = `${global.location.origin}/${pathname}/${useRecipe.idDrink}`;
 
   return (
     <div>
@@ -19,7 +23,7 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
         <p>{useRecipe.strAlcoholic}</p>
         <button
           type="button"
-          onClick={ handleShare }
+          onClick={ () => handleShare(urlPage, setUrlPage) }
         >
           <img
             src={ ShareIcon }
@@ -37,6 +41,9 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
             data-testid="favorite-btn"
           />
         </button>
+        {
+          useUrlPage && (<p>Link copied!</p>)
+        }
         <p data-testid="recipe-category">{useRecipe.strCategory}</p>
       </div>
 
