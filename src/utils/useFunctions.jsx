@@ -20,11 +20,6 @@ export function handleStarRecipe() {
 export function handleIngredients(useRecipe) {
   const MAX = 20;
   const ingredientsList = [];
-  // const ingredientsList = {
-  //   ingredients: [],
-  //   measures: [],
-  // };
-  // const mesureList = [];
 
   for (let i = 1; i <= MAX; i += 1) {
     const ingredient = useRecipe[`strIngredient${i}`];
@@ -38,4 +33,9 @@ export function handleIngredients(useRecipe) {
     }
   }
   return ingredientsList;
+}
+
+export function handleStrYouTube(url) {
+  const urlEmbed = url.replace('watch?v=', 'embed/');
+  return urlEmbed;
 }

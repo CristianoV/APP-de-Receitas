@@ -3,12 +3,14 @@ import { useLocation } from 'react-router-dom';
 import propTypes from 'prop-types';
 import ShareIcon from '../images/shareIcon.svg';
 import FavIcon from '../images/whiteHeartIcon.svg';
-import { handleShare, handleFavorite, handleStarRecipe } from '../utils/useFunctions';
+import { handleShare, handleFavorite, handleStarRecipe, handleStrYouTube }
+from '../utils/useFunctions';
 
 export default function CardsDetails({ useRecipe, useIngredients }) {
   const [useUrlPage, setUrlPage] = useState(false);
   const { pathname } = useLocation();
   const urlPage = `${global.location.origin}${pathname}`;
+
   return (
     <div>
 
@@ -73,7 +75,7 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
           title={ useRecipe.strMeal }
           width="420"
           height="315"
-          src={ useRecipe.strYoutube }
+          src={ handleStrYouTube(useRecipe.strYoutube) }
           data-testid="video"
         />
       </div>
