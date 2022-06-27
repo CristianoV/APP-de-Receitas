@@ -22,7 +22,20 @@ export default function CarouselCard() {
     }, [pathname],
   );
   console.log(userRecomend);
+  const num = 6;
   return (
-    <div>CarouselCard</div>
+    <div>
+      <div>
+        {userRecomend.length !== 0 && (
+          userRecomend.slice(0, num).map((recipe, index) => (
+            <div data-testid={ `${index}-recomendation-card` } key={ index }>
+              <p data-testid={ `${index}-recomendation-title` }>
+                { pathname.includes('foods') ? recipe.strMeal : recipe.strDrink}
+              </p>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
   );
 }
