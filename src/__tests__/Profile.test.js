@@ -13,47 +13,31 @@ describe('Testa a página de perfil', () => {
 
   it('Verifica se todos os botões são renderizados  na tela', () => {
     renderWithRouterAndRedux(<Profile />);
+
     const buttons = 3;
     const button = screen.getAllByRole('button');
+    const buttonOne = screen.getByTestId('profile-done-btn');
+    const buttonTwo = screen.getByTestId('profile-favorite-btn');
+    const buttonTree = screen.getByTestId('profile-logout-btn');
+
     expect(button).toHaveLength(buttons);
+    expect(buttonOne).toBeInTheDocument();
+    expect(buttonTwo).toBeInTheDocument();
+    expect(buttonTree).toBeInTheDocument();
   });
 
-  it('Verifica se há um botão "Done Recipes"', () => {
-    renderWithRouterAndRedux(<Profile />);
-    const button = screen.getByTestId('profile-done-btn');
-    expect(button).toBeInTheDocument();
-  });
-
-  it('Verifica se há um botão "Favorite Recipes"', () => {
-    renderWithRouterAndRedux(<Profile />);
-    const button = screen.getByTestId('profile-favorite-btn');
-    expect(button).toBeInTheDocument();
-  });
-
-  it('Verifica se há um botão "Logout"', () => {
-    renderWithRouterAndRedux(<Profile />);
-    const button = screen.getByTestId('profile-logout-btn');
-    expect(button).toBeInTheDocument();
-  });
-
-  it('Clicar no botão de "Done Recipes" redireciona para a página Done Recipes', () => {
+  it('Clicar nos botões redireciona para as páginas corretas', () => {
     const { history } = renderWithRouterAndRedux(<Profile />);
-    const button = screen.getByTestId('profile-done-btn');
-    userEvent.click(button);
+
+    const buttonOne = screen.getByTestId('profile-done-btn');
+    const buttonTwo = screen.getByTestId('profile-favorite-btn');
+    const buttonTree = screen.getByTestId('profile-logout-btn');
+
+    userEvent.click(buttonOne);
     expect(history.location.pathname).toBe('/done-recipes');
-  });
-
-  it('Clicar no botão "Favorite Recipes" leva para a página Favorite Recipes', () => {
-    const { history } = renderWithRouterAndRedux(<Profile />);
-    const button = screen.getByTestId('profile-favorite-btn');
-    userEvent.click(button);
+    userEvent.click(buttonTwo);
     expect(history.location.pathname).toBe('/favorite-recipes');
-  });
-
-  it('Clicar no botão "Logout" redireciona para a tela de Login', () => {
-    const { history } = renderWithRouterAndRedux(<Profile />);
-    const button = screen.getByTestId('profile-logout-btn');
-    userEvent.click(button);
+    userEvent.click(buttonTree);
     expect(history.location.pathname).toBe('/');
   });
 });
