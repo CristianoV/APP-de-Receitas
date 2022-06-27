@@ -33,16 +33,14 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
             key={ index }
             data-testid={ `${index}-ingredient-name-and-measure` }
           >
-            <div key={ index }>
-              <p>
-                -
-                { theIngredients }
-                {' '}
-                -
-                {' '}
-                { theMeasures }
-              </p>
-            </div>
+            <p>
+              -
+              { theIngredients }
+              {' '}
+              -
+              {' '}
+              { theMeasures }
+            </p>
           </div>
         ))}
       </div>
@@ -60,6 +58,14 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
           data-testid="video"
         />
       </div>
+
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        onClick={ () => console.log('começar receita') }
+      >
+        Start Recipe
+      </button>
     </div>
   );
 }

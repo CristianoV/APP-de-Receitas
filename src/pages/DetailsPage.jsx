@@ -85,14 +85,6 @@ export default function DetailsPage() {
             <div>
               <p>Recomendações</p>
             </div>
-
-            <button
-              type="button"
-              data-testid="start-recipe-btn"
-              onClick={ () => console.log('começar receita') }
-            >
-              Start Recipe
-            </button>
           </div>
         )
       }
