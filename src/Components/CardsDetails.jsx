@@ -8,7 +8,7 @@ import { handleShare, handleFavorite, handleStarRecipe } from '../utils/useFunct
 export default function CardsDetails({ useRecipe, useIngredients }) {
   const [useUrlPage, setUrlPage] = useState(false);
   const { pathname } = useLocation();
-  const urlPage = `${global.location.origin}/${pathname}/${useRecipe.idDrink}`;
+  const urlPage = `${global.location.origin}${pathname}`;
   return (
     <div>
 

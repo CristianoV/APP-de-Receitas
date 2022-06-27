@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import CardsDetails from '../Components/CardsDetails';
 import DrinkCardsDetails from '../Components/DrinkDetailsCard';
 import { handleIngredients } from '../utils/useFunctions';
+import { setDrinksDetails, setFoodsDetails } from '../redux/action/detailsPageActions';
 
 export default function DetailsPage() {
+  const dispatch = useDispatch();
   const [useRecipe, setRecipe] = useState('');
   const [useIngredients, setIngredients] = useState({});
-
-  const Receitas = useSelector((state) => state.reducerHeader.Receitas);
-  console.log(Receitas);
+  // const useRecipe = useSelector((state) => state.reducerDetails.details);
 
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -18,7 +18,6 @@ export default function DetailsPage() {
   useEffect(() => {
     async function getRecipe() {
       if (pathname.includes('foods')) {
-        console.log('deu foods');
         const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
         const { meals } = await (await fetch(url)).json();
 
@@ -26,7 +25,6 @@ export default function DetailsPage() {
         setRecipe(mealRecipe);
       }
       if (pathname.includes('drinks')) {
-        console.log('deu driks');
         const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
         const { drinks } = await (await fetch(url)).json();
         const drinkRecipe = drinks[0];
@@ -37,7 +35,20 @@ export default function DetailsPage() {
   }, [id, pathname]);
 
   useEffect(() => {
+    if (pathname.includes('foods')) {
+      dispatch(setFoodsDetails(id));
+    }
+    if (pathname.includes('drinks')) {
+      dispatch(setDrinksDetails(id));
+    }
+  }, [pathname, id, dispatch]);
+
+  useEffect(() => {
     setIngredients(handleIngredients(useRecipe));
+    // if (useRecipe !== undefined) {
+    //   setIngredients(handleIngredients(useRecipe));
+    // }
+    // if (useRecipe !== undefined) console.log('deu', useRecipe);
   }, [useRecipe]);
 
   return (

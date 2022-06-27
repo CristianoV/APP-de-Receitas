@@ -6,10 +6,9 @@ import FavIcon from '../images/whiteHeartIcon.svg';
 import { handleShare, handleFavorite, handleStarRecipe } from '../utils/useFunctions';
 
 export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
-  console.log(useRecipe);
   const [useUrlPage, setUrlPage] = useState(false);
   const { pathname } = useLocation();
-  const urlPage = `${global.location.origin}/${pathname}/${useRecipe.idDrink}`;
+  const urlPage = `${global.location.origin}${pathname}`;
 
   return (
     <div>
