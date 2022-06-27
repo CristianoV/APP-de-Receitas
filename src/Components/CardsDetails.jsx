@@ -5,6 +5,7 @@ import ShareIcon from '../images/shareIcon.svg';
 import FavIcon from '../images/whiteHeartIcon.svg';
 import { handleShare, handleFavorite, handleStarRecipe, handleStrYouTube }
 from '../utils/useFunctions';
+import CarouselCard from './CarouselCard';
 
 export default function CardsDetails({ useRecipe, useIngredients }) {
   const [useUrlPage, setUrlPage] = useState(false);
@@ -81,7 +82,7 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
       </div>
 
       <div>
-        <p>Recomendações</p>
+        <CarouselCard />
       </div>
 
       <button

@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import ShareIcon from '../images/shareIcon.svg';
 import FavIcon from '../images/whiteHeartIcon.svg';
 import { handleShare, handleFavorite, handleStarRecipe } from '../utils/useFunctions';
+import CarouselCard from './CarouselCard';
 
 export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
   const [useUrlPage, setUrlPage] = useState(false);
@@ -70,7 +71,7 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
       </div>
 
       <div>
-        <p>Recomendações</p>
+        <CarouselCard />
       </div>
 
       <button
