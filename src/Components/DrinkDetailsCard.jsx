@@ -2,9 +2,11 @@ import React from 'react';
 import propTypes from 'prop-types';
 import ShareIcon from '../images/shareIcon.svg';
 import FavIcon from '../images/whiteHeartIcon.svg';
+import { handleShare, handleFavorite, handleStarRecipe } from '../utils/useFunctions';
 
 export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
   console.log(useRecipe);
+
   return (
     <div>
       <div>
@@ -15,16 +17,26 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
         />
         <h1 data-testid="recipe-title">{useRecipe.strDrink}</h1>
         <p>{useRecipe.strAlcoholic}</p>
-        <img
-          src={ ShareIcon }
-          alt="Share Button"
-          data-testid="share-btn"
-        />
-        <img
-          src={ FavIcon }
-          alt="Share Button"
-          data-testid="favorite-btn"
-        />
+        <button
+          type="button"
+          onClick={ handleShare }
+        >
+          <img
+            src={ ShareIcon }
+            alt="Share Button"
+            data-testid="share-btn"
+          />
+        </button>
+        <button
+          type="button"
+          onClick={ handleFavorite }
+        >
+          <img
+            src={ FavIcon }
+            alt="Share Button"
+            data-testid="favorite-btn"
+          />
+        </button>
         <p data-testid="recipe-category">{useRecipe.strCategory}</p>
       </div>
 
@@ -35,7 +47,8 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
             data-testid={ `${index}-ingredient-name-and-measure` }
           >
             <p>
-              -
+              --
+              {' '}
               { theIngredients }
               {' '}
               -
@@ -50,10 +63,14 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
         <p data-testid="instructions">{useRecipe.strInstructions}</p>
       </div>
 
+      <div>
+        <p>Recomendações</p>
+      </div>
+
       <button
         type="button"
         data-testid="start-recipe-btn"
-        onClick={ () => console.log('começar receita') }
+        onClick={ handleStarRecipe }
       >
         Start Recipe
       </button>

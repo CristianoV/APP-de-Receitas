@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import CardsDetails from '../Components/CardsDetails';
 import DrinkCardsDetails from '../Components/DrinkDetailsCard';
+import { handleIngredients } from '../utils/useFunctions';
 
 export default function DetailsPage() {
   const [useRecipe, setRecipe] = useState('');
@@ -36,26 +37,7 @@ export default function DetailsPage() {
   }, [id, pathname]);
 
   useEffect(() => {
-    const MAX = 20;
-    const ingredientsList = [];
-    // const ingredientsList = {
-    //   ingredients: [],
-    //   measures: [],
-    // };
-    // const mesureList = [];
-
-    for (let i = 1; i <= MAX; i += 1) {
-      const ingredient = useRecipe[`strIngredient${i}`];
-      const measure = useRecipe[`strMeasure${i}`];
-
-      if (ingredient && ingredient.length !== 0) {
-        ingredientsList.push({
-          theIngredients: ingredient,
-          theMeasures: measure,
-        });
-      }
-    }
-    setIngredients(ingredientsList);
+    setIngredients(handleIngredients(useRecipe));
   }, [useRecipe]);
 
   return (
@@ -69,7 +51,7 @@ export default function DetailsPage() {
         useRecipe && (
           <div>
             {
-              pathname === '/foods' ? (
+              pathname.includes('foods') ? (
                 <CardsDetails
                   useRecipe={ useRecipe }
                   useIngredients={ useIngredients }
@@ -81,10 +63,6 @@ export default function DetailsPage() {
                 />
               )
             }
-
-            <div>
-              <p>Recomendações</p>
-            </div>
           </div>
         )
       }
