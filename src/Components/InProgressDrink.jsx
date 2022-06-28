@@ -14,19 +14,19 @@ function InProgressDrink({ ingredients, instructions }) {
       <button type="button" data-testid="favorite-btn">Favoritar</button>
       <p data-testid="recipe-category">{instructions.strAlcoholic}</p>
       <div>
-        {console.log(ingredients)}
         {ingredients.map(({ theIngredients }, index) => (
           <div key={ index }>
             <label htmlFor={ theIngredients } data-testid={ `${index}-ingredient-step` }>
-              <input
-                type="checkbox"
-                name="teste"
-                value={ theIngredients }
-                id={ theIngredients }
-              />
-              {/* <s> */}
-              { theIngredients }
-              {/* </s> */}
+              <s>
+                <input
+                  type="checkbox"
+                  name="teste"
+                  value={ theIngredients }
+                  id={ theIngredients }
+                  onChange={ () => { console.log(theIngredients); } }
+                />
+                { theIngredients }
+              </s>
             </label>
           </div>
         ))}
