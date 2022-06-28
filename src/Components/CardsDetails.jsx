@@ -81,9 +81,7 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
         />
       </div>
 
-      <div>
-        <CarouselCard />
-      </div>
+      <CarouselCard />
 
       <button
         type="button"

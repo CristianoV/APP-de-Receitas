@@ -20,7 +20,6 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
           data-testid="recipe-photo"
         />
         <h1 data-testid="recipe-title">{useRecipe.strDrink}</h1>
-        <p>{useRecipe.strAlcoholic}</p>
         <button
           type="button"
           onClick={ () => handleShare(urlPage, setUrlPage) }
@@ -44,7 +43,8 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
         {
           useUrlPage && (<p>Link copied!</p>)
         }
-        <p data-testid="recipe-category">{useRecipe.strCategory}</p>
+        <p>{useRecipe.strCategory}</p>
+        <p data-testid="recipe-category">{useRecipe.strAlcoholic}</p>
       </div>
 
       <div>
@@ -65,15 +65,10 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
           </div>
         ))}
       </div>
-
       <div>
         <p data-testid="instructions">{useRecipe.strInstructions}</p>
       </div>
-
-      <div>
-        <CarouselCard />
-      </div>
-
+      <CarouselCard />
       <button
         type="button"
         data-testid="start-recipe-btn"
