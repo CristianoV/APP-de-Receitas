@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../../Components/Footer';
+import { handleSupriseBtn } from '../../utils/useFunctions';
 
 export default function ExploreDrinks() {
   const history = useHistory();
@@ -18,7 +19,7 @@ export default function ExploreDrinks() {
         <button
           type="button"
           data-testid="explore-surprise"
-          onClick={ () => console.log('surprise!') }
+          onClick={ () => handleSupriseBtn(history) }
         >
           Surprise me!
         </button>
