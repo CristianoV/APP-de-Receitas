@@ -15,6 +15,7 @@ import FoodsNacionality from './pages/ExplorePages/FoodsNacionality';
 import Header from './Components/Header';
 import Profile from './pages/Profile';
 import DetailsPage from './pages/DetailsPage';
+import InProgress from './pages/InProgress';
 
 function App() {
   // TODO: Adicionar Header e Footer nas páginas principais Foods e Drinks
@@ -26,10 +27,12 @@ function App() {
         <Route exact path="/foods" component={ Mainpage } />
         <Route exact path="/drinks" component={ Mainpage } />
         <Route
+          exact
           path="/foods/:id"
           render={ (props) => <DetailsPage { ...props } /> }
         />
         <Route
+          exact
           path="/drinks/:id"
           render={ (props) => <DetailsPage { ...props } /> }
         />
@@ -38,6 +41,8 @@ function App() {
         <Route exact path="/explore/foods" component={ ExploreFoods } />
         <Route exact path="/explore/foods/ingredients" component={ FoodsIngredients } />
         <Route exact path="/explore/drinks/ingredients" component={ DrinksIngredients } />
+        <Route path="/foods/:id/in-progress" component={ InProgress } />
+        <Route path="/drinks/:id/in-progress" component={ InProgress } />
         <Route exact path="/explore/foods/nationalities" component={ FoodsNacionality } />
         <Route path="/profile" component={ Profile } />
       </Switch>
