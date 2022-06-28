@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 import ShareIcon from '../images/shareIcon.svg';
 import FavIcon from '../images/whiteHeartIcon.svg';
@@ -10,6 +10,7 @@ import CarouselCard from './CarouselCard';
 export default function CardsDetails({ useRecipe, useIngredients }) {
   const [useUrlPage, setUrlPage] = useState(false);
   const { pathname } = useLocation();
+  const history = useHistory();
   const urlPage = `${global.location.origin}${pathname}`;
 
   return (
@@ -86,7 +87,7 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
       <button
         type="button"
         data-testid="start-recipe-btn"
-        onClick={ handleStarRecipe }
+        onClick={ () => handleStarRecipe(history, useRecipe.idMeal) }
       >
         Start Recipe
       </button>
