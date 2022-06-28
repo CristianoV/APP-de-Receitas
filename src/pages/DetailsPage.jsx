@@ -45,6 +45,8 @@ export default function DetailsPage() {
 
   useEffect(() => {
     setIngredients(handleIngredients(useRecipe));
+    console.log(useRecipe);
+
     // if (useRecipe !== undefined) {
     //   setIngredients(handleIngredients(useRecipe));
     // }
