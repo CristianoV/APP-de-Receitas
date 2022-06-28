@@ -13,8 +13,13 @@ export function handleFavorite() {
   console.log('fav');
 }
 
-export function handleStarRecipe() {
-  console.log('começar receita');
+export function handleStarRecipe(history, idRecipe) {
+  if (history.location.pathname.includes('foods')) {
+    history.push(`/foods/${idRecipe}/in-progress`);
+  }
+  if (history.location.pathname.includes('drinks')) {
+    history.push(`/drinks/${idRecipe}/in-progress`);
+  }
 }
 
 export function handleIngredients(useRecipe) {
