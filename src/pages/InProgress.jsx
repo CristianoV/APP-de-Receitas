@@ -7,7 +7,6 @@ import { handleIngredients } from '../utils/useFunctions';
 function InProgress() {
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState([]);
-  // const recipesItens = localStorage.getItem('inProgressRecipes');
   const { id } = useParams();
   const { pathname } = useLocation();
 
@@ -31,20 +30,6 @@ function InProgress() {
     }
     getRecipe();
   }, [id, pathname]);
-
-  // useEffect(() => {
-  //   if (recipesItens && recipes) {
-  //     if (pathname.includes('drinks')) {
-  //       const recipesSet = recipesItens.map((item) => item === 'cocktails');
-  //       const recipesSet2 = recipesSet.filter((item) => item === id);
-  //       setIngredients(recipesSet2);
-  //     } else if (pathname.includes('foods')) {
-  //       const recipesSet = recipesItens.map((item) => item === 'meals');
-  //       const recipesSet2 = recipesSet.filter((item) => item === id);
-  //       setIngredients(recipesSet2);
-  //     }
-  //   }
-  // }, []);
 
   return (
     <div>

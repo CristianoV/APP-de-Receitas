@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 function InProgressDrink({ ingredients, instructions }) {
+  const [inputs, setInputs] = useState([]);
+
+  useEffect(() => {
+    if (ingredients) {
+      const input = ingredients.map(() => false);
+      setInputs(input);
+    }
+  },
+  [ingredients]);
   return (
     <div>
       <img
@@ -14,19 +23,26 @@ function InProgressDrink({ ingredients, instructions }) {
       <button type="button" data-testid="favorite-btn">Favoritar</button>
       <p data-testid="recipe-category">{instructions.strAlcoholic}</p>
       <div>
-        {ingredients.map(({ theIngredients }, index) => (
+        {ingredients.map(({ theIngredients, theMeasures }, index) => (
           <div key={ index }>
             <label htmlFor={ theIngredients } data-testid={ `${index}-ingredient-step` }>
-              <s>
-                <input
-                  type="checkbox"
-                  name="teste"
-                  value={ theIngredients }
-                  id={ theIngredients }
-                  onChange={ () => { console.log(theIngredients); } }
-                />
-                { theIngredients }
-              </s>
+              <input
+                type="checkbox"
+                name="teste"
+                value={ theIngredients }
+                id={ theIngredients }
+                onChange={ () => {
+                  setInputs(inputs.map((item, i) => (i === index ? !item : item)));
+                } }
+              />
+              {inputs[index] === false ? `${theIngredients} 
+              ${theMeasures === null ? '' : theMeasures}`
+                : (
+                  <s>
+                    {console.log(theMeasures)}
+                    {`${theIngredients} ${theMeasures === null ? '' : theMeasures}`}
+                  </s>
+                )}
             </label>
           </div>
         ))}
