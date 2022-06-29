@@ -117,18 +117,17 @@ function InProgressDrink({ ingredients, instructions }) {
         ))}
       </div>
       <p data-testid="instructions">{instructions.strInstructions}</p>
-      {inputs.length === ingredients.length
-      && (
-        <button
-          type="button"
-          data-testid="finish-recipe-btn"
-          onClick={ () => {
-            history.push('/done-recipes');
-          } }
-        >
-          Finalizar Receita
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        disabled={ inputs.length !== ingredients.length }
+        onClick={ () => {
+          history.push('/done-recipes');
+        } }
+      >
+        Finalizar Receita
 
-        </button>) }
+      </button>
     </div>);
 }
 
