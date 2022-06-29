@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import ShareIcon from '../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import FavIcon from '../images/whiteHeartIcon.svg';
 import { handleShare, handleFavorite }
 from '../utils/useFunctions';
+import InputsProgress from './InputsProgress';
 
 function InProgressFood({ ingredients, instructions }) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -93,7 +95,7 @@ function InProgressFood({ ingredients, instructions }) {
         onClick={ () => handleFavorite(validation()) }
       >
         <img
-          src={ FavIcon }
+          src={ ValidationFaforite ? blackHeartIcon : FavIcon }
           alt="Share Button"
           data-testid="favorite-btn"
         />
@@ -116,13 +118,18 @@ function InProgressFood({ ingredients, instructions }) {
                   handleChange(e);
                 } }
               />
-              {inputs && inputs.some((input) => input === theIngredients) ? (
+              {/* {inputs && inputs.some((input) => input === theIngredients) ? (
                 <s>
                   {`${theIngredients} ${theMeasures === null ? '' : theMeasures}`}
                 </s>
               )
                 : `${theIngredients}
-                ${theMeasures === null ? '' : theMeasures}`}
+                ${theMeasures === null ? '' : theMeasures}`} */}
+              <InputsProgress
+                theMeasures={ theMeasures }
+                inputs={ inputs }
+                theIngredients={ theIngredients }
+              />
             </label>
           </div>
         ))}

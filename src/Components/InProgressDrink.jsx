@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import ShareIcon from '../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import FavIcon from '../images/whiteHeartIcon.svg';
 import { handleShare, handleFavorite }
 from '../utils/useFunctions';
+import InputsProgress from './InputsProgress';
 
 function InProgressDrink({ ingredients, instructions }) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -64,10 +66,9 @@ function InProgressDrink({ ingredients, instructions }) {
     const newInputs = [...inputs];
     const abc = inputs.some((input) => input === name);
     if (abc) {
-      setInputs(newInputs.filter((input) => input !== name));
-    } else {
-      setInputs([...newInputs, name]);
+      return setInputs(newInputs.filter((input) => input !== name));
     }
+    return setInputs([...newInputs, name]);
   };
 
   return (
@@ -93,7 +94,7 @@ function InProgressDrink({ ingredients, instructions }) {
         onClick={ () => handleFavorite(validation()) }
       >
         <img
-          src={ FavIcon }
+          src={ ValidationFaforite ? blackHeartIcon : FavIcon }
           alt="Share Button"
           data-testid="favorite-btn"
         />
@@ -103,7 +104,7 @@ function InProgressDrink({ ingredients, instructions }) {
       }
       <p data-testid="recipe-category">{instructions.strAlcoholic}</p>
       <div>
-        {ingredients.map(({ theIngredients, theMeasures }, index) => (
+        {ingredients && ingredients.map(({ theIngredients, theMeasures }, index) => (
           <div key={ index }>
             <label htmlFor={ theIngredients } data-testid={ `${index}-ingredient-step` }>
               <input
@@ -116,13 +117,18 @@ function InProgressDrink({ ingredients, instructions }) {
                   handleChange(e);
                 } }
               />
-              {inputs && inputs.some((input) => input === theIngredients) ? (
+              {/* {inputs && inputs.some((input) => input === theIngredients) ? (
                 <s>
                   {`${theIngredients} ${theMeasures === null ? '' : theMeasures}`}
                 </s>
               )
                 : `${theIngredients}
-                ${theMeasures === null ? '' : theMeasures}`}
+                ${theMeasures === null ? '' : theMeasures}`} */}
+              <InputsProgress
+                theMeasures={ theMeasures }
+                inputs={ inputs }
+                theIngredients={ theIngredients }
+              />
             </label>
           </div>
         ))}
@@ -137,7 +143,6 @@ function InProgressDrink({ ingredients, instructions }) {
         } }
       >
         Finalizar Receita
-
       </button>
     </div>);
 }
