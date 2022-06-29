@@ -16,23 +16,22 @@ function InProgressFood({ ingredients, instructions }) {
   const urlPageFormatado = urlPage.replace(urlPage,
     `${global.location.origin}/foods/${id}`);
 
-  const setLocalStorage = () => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(
-      {
-        cocktails: {
-          ...storage?.cocktails,
-        },
-        meals: {
-          ...storage?.meals,
-          [id]: inputs,
-        },
-      },
-    ));
-  };
-
   useEffect(() => {
+    const setLocalStorage = () => {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(
+        {
+          cocktails: {
+            ...storage?.cocktails,
+          },
+          meals: {
+            ...storage?.meals,
+            [id]: inputs,
+          },
+        },
+      ));
+    };
     setLocalStorage();
-  }, [inputs, id]);
+  }, [inputs, id, storage]);
 
   const handleChange = ({ target }) => {
     const { name } = target;

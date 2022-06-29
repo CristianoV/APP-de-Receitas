@@ -16,23 +16,36 @@ function InProgressDrink({ ingredients, instructions }) {
   const urlPageFormatado = urlPage.replace(urlPage,
     `${global.location.origin}/drinks/${id}`);
 
-  const setLocalStorage = () => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(
-      {
-        cocktails: {
-          ...storage?.cocktails,
-          [id]: inputs,
-        },
-        meals: {
-          ...storage?.meals,
-        },
-      },
-    ));
-  };
+  // const setLocalStorage = () => {
+  //   localStorage.setItem('inProgressRecipes', JSON.stringify(
+  //     {
+  //       cocktails: {
+  //         ...storage?.cocktails,
+  //         [id]: inputs,
+  //       },
+  //       meals: {
+  //         ...storage?.meals,
+  //       },
+  //     },
+  //   ));
+  // };
 
   useEffect(() => {
+    const setLocalStorage = () => {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(
+        {
+          cocktails: {
+            ...storage?.cocktails,
+            [id]: inputs,
+          },
+          meals: {
+            ...storage?.meals,
+          },
+        },
+      ));
+    };
     setLocalStorage();
-  }, [inputs, id]);
+  }, [id, inputs, storage]);
 
   const handleChange = ({ target }) => {
     const { name } = target;
