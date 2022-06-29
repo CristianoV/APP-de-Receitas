@@ -1,16 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
+import { useLocation, useParams } from 'react-router-dom';
+import ShareIcon from '../images/shareIcon.svg';
+import FavIcon from '../images/whiteHeartIcon.svg';
+import { handleShare, handleFavorite }
+from '../utils/useFunctions';
 
 function InProgressDrink({ ingredients, instructions }) {
-  const [inputs, setInputs] = useState([]);
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const { id } = useParams();
+  const [inputs, setInputs] = useState(storage?.cocktails?.[id] || []);
+  const [useUrlPage, setUrlPage] = useState(false);
+  const { pathname } = useLocation();
+  const urlPage = `${global.location.origin}${pathname}`;
+  const urlPageFormatado = urlPage.replace(urlPage,
+    `${global.location.origin}/drinks/${id}`);
+
+  const setLocalStorage = () => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      {
+        cocktails: {
+          ...storage?.cocktails,
+          [id]: inputs,
+        },
+        meals: {
+          ...storage?.meals,
+        },
+      },
+    ));
+  };
 
   useEffect(() => {
-    if (ingredients) {
-      const input = ingredients.map(() => false);
-      setInputs(input);
+    setLocalStorage();
+  }, [inputs, id]);
+
+  const handleChange = ({ target }) => {
+    const { name } = target;
+    const newInputs = [...inputs];
+    const abc = inputs.some((input) => input === name);
+    if (abc) {
+      setInputs(newInputs.filter((input) => input !== name));
+    } else {
+      setInputs([...newInputs, name]);
     }
-  },
-  [ingredients]);
+  };
+
   return (
     <div>
       <img
@@ -19,8 +53,29 @@ function InProgressDrink({ ingredients, instructions }) {
         alt={ instructions.strDrink }
       />
       <h1 data-testid="recipe-title">{instructions.strDrink}</h1>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
-      <button type="button" data-testid="favorite-btn">Favoritar</button>
+      <button
+        type="button"
+        onClick={ () => handleShare(urlPageFormatado, setUrlPage) }
+      >
+        <img
+          src={ ShareIcon }
+          alt="Share Button"
+          data-testid="share-btn"
+        />
+      </button>
+      <button
+        type="button"
+        onClick={ handleFavorite }
+      >
+        <img
+          src={ FavIcon }
+          alt="Share Button"
+          data-testid="favorite-btn"
+        />
+      </button>
+      {
+        useUrlPage && (<p>Link copied!</p>)
+      }
       <p data-testid="recipe-category">{instructions.strAlcoholic}</p>
       <div>
         {ingredients.map(({ theIngredients, theMeasures }, index) => (
@@ -28,21 +83,21 @@ function InProgressDrink({ ingredients, instructions }) {
             <label htmlFor={ theIngredients } data-testid={ `${index}-ingredient-step` }>
               <input
                 type="checkbox"
-                name="teste"
+                name={ theIngredients }
+                checked={ inputs.some((input) => input === theIngredients) }
                 value={ theIngredients }
                 id={ theIngredients }
-                onChange={ () => {
-                  setInputs(inputs.map((item, i) => (i === index ? !item : item)));
+                onChange={ (e) => {
+                  handleChange(e);
                 } }
               />
-              {inputs[index] === false ? `${theIngredients} 
-              ${theMeasures === null ? '' : theMeasures}`
-                : (
-                  <s>
-                    {console.log(theMeasures)}
-                    {`${theIngredients} ${theMeasures === null ? '' : theMeasures}`}
-                  </s>
-                )}
+              {inputs && inputs.some((input) => input === theIngredients) ? (
+                <s>
+                  {`${theIngredients} ${theMeasures === null ? '' : theMeasures}`}
+                </s>
+              )
+                : `${theIngredients}
+                ${theMeasures === null ? '' : theMeasures}`}
             </label>
           </div>
         ))}

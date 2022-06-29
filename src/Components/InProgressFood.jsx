@@ -1,53 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
+import { useLocation, useParams } from 'react-router-dom';
+import ShareIcon from '../images/shareIcon.svg';
+import FavIcon from '../images/whiteHeartIcon.svg';
+import { handleShare, handleFavorite }
+from '../utils/useFunctions';
 
 function InProgressFood({ ingredients, instructions }) {
-  const [inputs, setInputs] = useState([]);
-  const recipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const { id } = useParams();
+  const [inputs, setInputs] = useState(storage?.meals?.[id] || []);
+  const [useUrlPage, setUrlPage] = useState(false);
+  const { pathname } = useLocation();
+  const urlPage = `${global.location.origin}${pathname}`;
+  const urlPageFormatado = urlPage.replace(urlPage,
+    `${global.location.origin}/foods/${id}`);
 
-  useEffect(() => {
-    if (ingredients) {
-      const input = ingredients.map(() => false);
-      setInputs(input);
-    }
-  },
-  [ingredients]);
-
-  // useEffect(() => {
-  //   if (recipe > 0) {
-  //     localStorage.setItem('inProgressRecipes', JSON.stringify(
-  //       { ...recipe, meals: recipe.meals, [instructions.idMeal]: inputs },
-  //     ));
-  //   } else {
-  //     localStorage.setItem('inProgressRecipes', JSON.stringify({
-  //       meals: {
-  //         [instructions.idMeal]: inputs,
-  //       },
-  //     }));
-  //   }
-  // },
-  // [inputs, instructions, recipe]);
-
-  useEffect(() => {
-    console.log(recipe.meals);
-    if (recipe.meals.length > 0) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(
-        // [{ meals: { ...recipe.meals }, [instructions.idMeal]: inputs }],
-        [...recipe, { meals: [recipe.meals], [instructions.idMeal]: inputs }],
-      ));
-    } else {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(
-        {
-          cocktails: {
-          },
-          meals: {
-            [instructions.idMeal]: inputs,
-          },
+  const setLocalStorage = () => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      {
+        cocktails: {
+          ...storage?.cocktails,
         },
-      ));
+        meals: {
+          ...storage?.meals,
+          [id]: inputs,
+        },
+      },
+    ));
+  };
+
+  useEffect(() => {
+    setLocalStorage();
+  }, [inputs, id]);
+
+  const handleChange = ({ target }) => {
+    const { name } = target;
+    const newInputs = [...inputs];
+    const abc = inputs.some((input) => input === name);
+    if (abc) {
+      setInputs(newInputs.filter((input) => input !== name));
+    } else {
+      setInputs([...newInputs, name]);
     }
-  },
-  [inputs, instructions, recipe]);
+  };
 
   return (
     <div>
@@ -57,29 +53,51 @@ function InProgressFood({ ingredients, instructions }) {
         alt={ instructions.strMeal }
       />
       <h1 data-testid="recipe-title">{instructions.strMeal}</h1>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
-      <button type="button" data-testid="favorite-btn">Favoritar</button>
+      <button
+        type="button"
+        onClick={ () => handleShare(urlPageFormatado, setUrlPage) }
+      >
+        <img
+          src={ ShareIcon }
+          alt="Share Button"
+          data-testid="share-btn"
+        />
+      </button>
+      <button
+        type="button"
+        onClick={ handleFavorite }
+      >
+        <img
+          src={ FavIcon }
+          alt="Share Button"
+          data-testid="favorite-btn"
+        />
+      </button>
+      {
+        useUrlPage && (<p>Link copied!</p>)
+      }
       <p data-testid="recipe-category">{instructions.strCategory}</p>
       <div>
-        {ingredients.map(({ theIngredients, theMeasures }, index) => (
+        {inputs && ingredients.map(({ theIngredients, theMeasures }, index) => (
           <div key={ index }>
             <label htmlFor={ theIngredients } data-testid={ `${index}-ingredient-step` }>
               <input
                 type="checkbox"
-                name="teste"
+                name={ theIngredients }
                 value={ theIngredients }
+                checked={ inputs.some((input) => input === theIngredients) }
                 id={ theIngredients }
-                onChange={ () => {
-                  setInputs(inputs.map((item, i) => (i === index ? !item : item)));
+                onChange={ (e) => {
+                  handleChange(e);
                 } }
               />
-              {inputs[index] === false ? `${theIngredients} 
-              ${theMeasures === null ? '' : theMeasures}`
-                : (
-                  <s>
-                    {`${theIngredients} ${theMeasures === null ? '' : theMeasures}`}
-                  </s>
-                )}
+              {inputs && inputs.some((input) => input === theIngredients) ? (
+                <s>
+                  {`${theIngredients} ${theMeasures === null ? '' : theMeasures}`}
+                </s>
+              )
+                : `${theIngredients}
+                ${theMeasures === null ? '' : theMeasures}`}
             </label>
           </div>
         ))}

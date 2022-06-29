@@ -19,7 +19,6 @@ export default function CarouselCard() {
     }
     getRecomendation();
   }, [pathname]);
-  console.log(useRecomend);
   const num = 6;
   return (
     <div>
