@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory, useParams } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { handleStarRecipe } from '../utils/useFunctions';
@@ -9,6 +9,8 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
   const favorito = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const [favorite, setFavorite] = useState(favorito || []);
   const { id } = useParams();
+  const [useInProgress, setInProgress] = useState(false);
+  // const [useDone, setDone] = useState(false);
   const [useUrlPage, setUrlPage] = useState(false);
   const { pathname } = useLocation();
   const history = useHistory();
@@ -27,6 +29,23 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
     }];
 
   const RemoveFavorite = favorite.filter((item) => item.id !== id);
+
+  useEffect(() => {
+    function inProgress() {
+      const localProgress = localStorage.getItem('inProgressRecipes');
+      // const localDone = localStorage.getItem('doneRecipes');
+
+      if (localProgress !== null) {
+        const recipesInProgress = JSON.parse(localProgress);
+        const keysInProgress = Object.keys(recipesInProgress.cocktails);
+        const verifyProgress = keysInProgress.some((ele) => ele === useRecipe.idDrink);
+
+        setInProgress(verifyProgress);
+        // setDone(verifyDone);
+      }
+    }
+    inProgress();
+  }, [useInProgress, useRecipe]);
 
   return (
     <div>
@@ -74,13 +93,36 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
         <p data-testid="instructions">{useRecipe.strInstructions}</p>
       </div>
       <CarouselCard />
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        onClick={ () => handleStarRecipe(history, useRecipe.idDrink) }
-      >
-        Start Recipe
-      </button>
+      {/* {
+        !useDone && (
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            onClick={ () => handleStarRecipe(history, useRecipe.idDrink) }
+          >
+            Start Recipe
+          </button>
+        )
+      } */}
+      {
+        useInProgress ? (
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            onClick={ () => handleStarRecipe(history, useRecipe.idDrink) }
+          >
+            Continue Recipe
+          </button>
+        ) : (
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            onClick={ () => handleStarRecipe(history, useRecipe.idDrink) }
+          >
+            Start Recipe
+          </button>
+        )
+      }
     </div>
   );
 }
