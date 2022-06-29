@@ -18,12 +18,12 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
     ...favorite,
     {
       id,
-      type: 'food',
-      nationality: useRecipe.strArea,
+      type: 'drink',
+      nationality: '',
       category: useRecipe.strCategory,
-      alcoholicOrNot: '',
-      name: useRecipe.strMeal,
-      image: useRecipe.strMealThumb,
+      alcoholicOrNot: useRecipe.strAlcoholic,
+      name: useRecipe.strDrink,
+      image: useRecipe.strDrinkThumb,
     }];
 
   const RemoveFavorite = favorite.filter((item) => item.id !== id);
