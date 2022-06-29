@@ -45,11 +45,6 @@ export default function DetailsPage() {
 
   useEffect(() => {
     setIngredients(handleIngredients(useRecipe));
-
-    // if (useRecipe !== undefined) {
-    //   setIngredients(handleIngredients(useRecipe));
-    // }
-    // if (useRecipe !== undefined) console.log('deu', useRecipe);
   }, [useRecipe]);
 
   return (

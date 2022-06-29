@@ -12,6 +12,8 @@ import ButtonFavorite from './ButtonsShare';
 function InProgressFood({ ingredients, instructions }) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const favorito = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const done = JSON.parse(localStorage.getItem('doneRecipes'));
+  const doneRecipesLocal = done || [];
   const [favorite, setFavorite] = useState(favorito || []);
   const { id } = useParams();
   const history = useHistory();
@@ -34,16 +36,20 @@ function InProgressFood({ ingredients, instructions }) {
       image: instructions.strMealThumb,
     }];
 
-  const RemoveFavorite = favorite.filter((item) => item.id !== id);
+  const doneRecipes = [
+    ...doneRecipesLocal, {
+      id,
+      type: 'food',
+      nationality: instructions.strArea,
+      category: instructions.strCategory,
+      alcoholicOrNot: '',
+      name: instructions.strMeal,
+      image: instructions.strMealThumb,
+      doneDate: Date(),
+      tags: instructions.strTags,
+    }];
 
-  // const validation = () => {
-  //   if (ValidationFaforite) {
-  //     setFavorite(RemoveFavorite);
-  //     return RemoveFavorite;
-  //   }
-  //   setFavorite(AddFavorite);
-  //   return AddFavorite;
-  // };
+  const RemoveFavorite = favorite.filter((item) => item.id !== id);
 
   useEffect(() => {
     const setLocalStorage = () => {
@@ -129,6 +135,7 @@ function InProgressFood({ ingredients, instructions }) {
         data-testid="finish-recipe-btn"
         disabled={ inputs.length !== ingredients.length }
         onClick={ () => {
+          localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
           history.push('/done-recipes');
         } }
       >

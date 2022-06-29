@@ -8,6 +8,8 @@ function InProgressDrink({ ingredients, instructions }) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const favorito = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const [favorite, setFavorite] = useState(favorito || []);
+  const done = JSON.parse(localStorage.getItem('doneRecipes'));
+  const doneRecipesLocal = done || [];
   const { id } = useParams();
   const [inputs, setInputs] = useState(storage?.cocktails?.[id] || []);
   const history = useHistory();
@@ -27,6 +29,19 @@ function InProgressDrink({ ingredients, instructions }) {
       alcoholicOrNot: instructions.strAlcoholic,
       name: instructions.strDrink,
       image: instructions.strDrinkThumb,
+    }];
+
+  const doneRecipes = [
+    ...doneRecipesLocal, {
+      id,
+      type: 'drink',
+      nationality: '',
+      category: instructions.strCategory,
+      alcoholicOrNot: instructions.strAlcoholic,
+      name: instructions.strDrink,
+      image: instructions.strDrinkThumb,
+      doneDate: Date(),
+      tags: instructions.strTags,
     }];
 
   const RemoveFavorite = favorite.filter((item) => item.id !== id);
@@ -114,6 +129,7 @@ function InProgressDrink({ ingredients, instructions }) {
         data-testid="finish-recipe-btn"
         disabled={ inputs.length !== ingredients.length }
         onClick={ () => {
+          localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
           history.push('/done-recipes');
         } }
       >
