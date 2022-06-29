@@ -8,6 +8,8 @@ from '../utils/useFunctions';
 
 function InProgressFood({ ingredients, instructions }) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  // const favorito = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  // const [favorite, setFavorite] = useState(favorito || []);
   const { id } = useParams();
   const history = useHistory();
   const [inputs, setInputs] = useState(storage?.meals?.[id] || []);
@@ -16,6 +18,16 @@ function InProgressFood({ ingredients, instructions }) {
   const urlPage = `${global.location.origin}${pathname}`;
   const urlPageFormatado = urlPage.replace(urlPage,
     `${global.location.origin}/foods/${id}`);
+
+  const teste = [{
+    id,
+    type: 'food',
+    nationality: instructions.strArea,
+    category: instructions.strCategory,
+    alcoholicOrNot: '',
+    name: instructions.strMeal,
+    image: instructions.strMealThumb,
+  }];
 
   useEffect(() => {
     const setLocalStorage = () => {
@@ -43,6 +55,7 @@ function InProgressFood({ ingredients, instructions }) {
     } else {
       setInputs([...newInputs, name]);
     }
+    console.log(teste);
   };
 
   return (
