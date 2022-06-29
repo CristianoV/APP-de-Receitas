@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
-import { useLocation, useParams } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import ShareIcon from '../images/shareIcon.svg';
 import FavIcon from '../images/whiteHeartIcon.svg';
 import { handleShare, handleFavorite }
@@ -10,6 +10,7 @@ function InProgressDrink({ ingredients, instructions }) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const { id } = useParams();
   const [inputs, setInputs] = useState(storage?.cocktails?.[id] || []);
+  const history = useHistory();
   const [useUrlPage, setUrlPage] = useState(false);
   const { pathname } = useLocation();
   const urlPage = `${global.location.origin}${pathname}`;
@@ -116,7 +117,18 @@ function InProgressDrink({ ingredients, instructions }) {
         ))}
       </div>
       <p data-testid="instructions">{instructions.strInstructions}</p>
-      <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
+      {inputs.length === ingredients.length
+      && (
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          onClick={ () => {
+            history.push('/done-recipes');
+          } }
+        >
+          Finalizar Receita
+
+        </button>) }
     </div>);
 }
 
