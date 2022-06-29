@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory, useParams } from 'react-router-dom';
 import propTypes from 'prop-types';
-import ShareIcon from '../images/shareIcon.svg';
-import FavIcon from '../images/whiteHeartIcon.svg';
-import { handleShare, handleFavorite, handleStarRecipe, handleStrYouTube }
-from '../utils/useFunctions';
+import { handleStarRecipe, handleStrYouTube } from '../utils/useFunctions';
 import CarouselCard from './CarouselCard';
+import ButtonShare from './ButtonsShare';
 
 export default function CardsDetails({ useRecipe, useIngredients }) {
+  const favorito = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const [favorite, setFavorite] = useState(favorito || []);
+  const { id } = useParams();
   const [useUrlPage, setUrlPage] = useState(false);
   const { pathname } = useLocation();
   const history = useHistory();
   const urlPage = `${global.location.origin}${pathname}`;
+  const ValidationFaforite = favorite.some((item) => item.id === id);
+  const AddFavorite = [
+    ...favorite,
+    {
+      id,
+      type: 'food',
+      nationality: useRecipe.strArea,
+      category: useRecipe.strCategory,
+      alcoholicOrNot: '',
+      name: useRecipe.strMeal,
+      image: useRecipe.strMealThumb,
+    }];
+
+  const RemoveFavorite = favorite.filter((item) => item.id !== id);
 
   return (
     <div>
@@ -23,26 +38,14 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
           data-testid="recipe-photo"
         />
         <h1 data-testid="recipe-title">{ useRecipe.strMeal }</h1>
-        <button
-          type="button"
-          onClick={ () => handleShare(urlPage, setUrlPage) }
-        >
-          <img
-            src={ ShareIcon }
-            alt="Share Button"
-            data-testid="share-btn"
-          />
-        </button>
-        <button
-          type="button"
-          onClick={ handleFavorite }
-        >
-          <img
-            src={ FavIcon }
-            alt="Share Button"
-            data-testid="favorite-btn"
-          />
-        </button>
+        <ButtonShare
+          urlPageFormatado={ urlPage }
+          setUrlPage={ setUrlPage }
+          setFavorite={ setFavorite }
+          ValidationFaforite={ ValidationFaforite }
+          AddFavorite={ AddFavorite }
+          RemoveFavorite={ RemoveFavorite }
+        />
         {
           useUrlPage && (<p>Link copied!</p>)
         }

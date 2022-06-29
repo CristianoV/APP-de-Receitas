@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
-import ShareIcon from '../images/shareIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import FavIcon from '../images/whiteHeartIcon.svg';
-import { handleShare, handleFavorite }
-from '../utils/useFunctions';
 import InputsProgress from './InputsProgress';
+import ButtonShare from './ButtonsShare';
 
 function InProgressDrink({ ingredients, instructions }) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -34,15 +30,6 @@ function InProgressDrink({ ingredients, instructions }) {
     }];
 
   const RemoveFavorite = favorite.filter((item) => item.id !== id);
-
-  const validation = () => {
-    if (ValidationFaforite) {
-      setFavorite(RemoveFavorite);
-      return RemoveFavorite;
-    }
-    setFavorite(AddFavorite);
-    return AddFavorite;
-  };
 
   useEffect(() => {
     const setLocalStorage = () => {
@@ -79,26 +66,14 @@ function InProgressDrink({ ingredients, instructions }) {
         alt={ instructions.strDrink }
       />
       <h1 data-testid="recipe-title">{instructions.strDrink}</h1>
-      <button
-        type="button"
-        onClick={ () => handleShare(urlPageFormatado, setUrlPage) }
-      >
-        <img
-          src={ ShareIcon }
-          alt="Share Button"
-          data-testid="share-btn"
-        />
-      </button>
-      <button
-        type="button"
-        onClick={ () => handleFavorite(validation()) }
-      >
-        <img
-          src={ ValidationFaforite ? blackHeartIcon : FavIcon }
-          alt="Share Button"
-          data-testid="favorite-btn"
-        />
-      </button>
+      <ButtonShare
+        urlPageFormatado={ urlPageFormatado }
+        setUrlPage={ setUrlPage }
+        setFavorite={ setFavorite }
+        ValidationFaforite={ ValidationFaforite }
+        AddFavorite={ AddFavorite }
+        RemoveFavorite={ RemoveFavorite }
+      />
       {
         useUrlPage && (<p>Link copied!</p>)
       }
