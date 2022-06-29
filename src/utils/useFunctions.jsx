@@ -9,8 +9,8 @@ export async function handleShare(urlPage, setUrlPage) {
   setUrlPage(true);
 }
 
-export function handleFavorite() {
-  console.log('fav');
+export function handleFavorite(teste) {
+  localStorage.setItem('favoriteRecipes', JSON.stringify(teste));
 }
 
 export function handleStarRecipe(history, idRecipe) {

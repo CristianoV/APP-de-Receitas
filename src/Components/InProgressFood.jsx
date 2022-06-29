@@ -8,8 +8,8 @@ from '../utils/useFunctions';
 
 function InProgressFood({ ingredients, instructions }) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  // const favorito = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  // const [favorite, setFavorite] = useState(favorito || []);
+  const favorito = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const [favorite, setFavorite] = useState(favorito || []);
   const { id } = useParams();
   const history = useHistory();
   const [inputs, setInputs] = useState(storage?.meals?.[id] || []);
@@ -18,16 +18,29 @@ function InProgressFood({ ingredients, instructions }) {
   const urlPage = `${global.location.origin}${pathname}`;
   const urlPageFormatado = urlPage.replace(urlPage,
     `${global.location.origin}/foods/${id}`);
+  const ValidationFaforite = favorite.some((item) => item.id === id);
+  const AddFavorite = [
+    ...favorite,
+    {
+      id,
+      type: 'food',
+      nationality: instructions.strArea,
+      category: instructions.strCategory,
+      alcoholicOrNot: '',
+      name: instructions.strMeal,
+      image: instructions.strMealThumb,
+    }];
 
-  const teste = [{
-    id,
-    type: 'food',
-    nationality: instructions.strArea,
-    category: instructions.strCategory,
-    alcoholicOrNot: '',
-    name: instructions.strMeal,
-    image: instructions.strMealThumb,
-  }];
+  const RemoveFavorite = favorite.filter((item) => item.id !== id);
+
+  const validation = () => {
+    if (ValidationFaforite) {
+      setFavorite(RemoveFavorite);
+      return RemoveFavorite;
+    }
+    setFavorite(AddFavorite);
+    return AddFavorite;
+  };
 
   useEffect(() => {
     const setLocalStorage = () => {
@@ -55,7 +68,6 @@ function InProgressFood({ ingredients, instructions }) {
     } else {
       setInputs([...newInputs, name]);
     }
-    console.log(teste);
   };
 
   return (
@@ -78,7 +90,7 @@ function InProgressFood({ ingredients, instructions }) {
       </button>
       <button
         type="button"
-        onClick={ handleFavorite }
+        onClick={ () => handleFavorite(validation()) }
       >
         <img
           src={ FavIcon }

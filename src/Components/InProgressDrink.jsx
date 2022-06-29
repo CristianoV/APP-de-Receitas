@@ -8,6 +8,8 @@ from '../utils/useFunctions';
 
 function InProgressDrink({ ingredients, instructions }) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const favorito = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const [favorite, setFavorite] = useState(favorito || []);
   const { id } = useParams();
   const [inputs, setInputs] = useState(storage?.cocktails?.[id] || []);
   const history = useHistory();
@@ -16,20 +18,29 @@ function InProgressDrink({ ingredients, instructions }) {
   const urlPage = `${global.location.origin}${pathname}`;
   const urlPageFormatado = urlPage.replace(urlPage,
     `${global.location.origin}/drinks/${id}`);
+  const ValidationFaforite = favorite.some((item) => item.id === id);
+  const AddFavorite = [
+    ...favorite,
+    {
+      id,
+      type: 'drink',
+      nationality: '',
+      category: instructions.strCategory,
+      alcoholicOrNot: instructions.strAlcoholic,
+      name: instructions.strDrink,
+      image: instructions.strDrinkThumb,
+    }];
 
-  // const setLocalStorage = () => {
-  //   localStorage.setItem('inProgressRecipes', JSON.stringify(
-  //     {
-  //       cocktails: {
-  //         ...storage?.cocktails,
-  //         [id]: inputs,
-  //       },
-  //       meals: {
-  //         ...storage?.meals,
-  //       },
-  //     },
-  //   ));
-  // };
+  const RemoveFavorite = favorite.filter((item) => item.id !== id);
+
+  const validation = () => {
+    if (ValidationFaforite) {
+      setFavorite(RemoveFavorite);
+      return RemoveFavorite;
+    }
+    setFavorite(AddFavorite);
+    return AddFavorite;
+  };
 
   useEffect(() => {
     const setLocalStorage = () => {
@@ -79,7 +90,7 @@ function InProgressDrink({ ingredients, instructions }) {
       </button>
       <button
         type="button"
-        onClick={ handleFavorite }
+        onClick={ () => handleFavorite(validation()) }
       >
         <img
           src={ FavIcon }
