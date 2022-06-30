@@ -1,0 +1,79 @@
+html, body, .holster {
+  height: 100%;
+}
+
+.holster {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  font-family: monospace;
+  justify-content: space-between;
+}
+
+.container {
+  display: flex;
+  flex: none;
+  outline: 1px dashed lightgray;
+  overflow: auto;
+}
+
+.container.x {
+  flex-flow: row nowrap;
+  height: 128px;
+  width: 100%;
+}
+
+.container.y {
+  flex-flow: column nowrap;
+  height: 256px;
+  width: 256px;
+}
+
+.x.mandatory-scroll-snapping {
+  scroll-snap-type: x mandatory;
+}
+
+.y.mandatory-scroll-snapping {
+  scroll-snap-type: y mandatory;
+}
+
+.x.proximity-scroll-snapping {
+  scroll-snap-type: x proximity;
+}
+
+.y.proximity-scroll-snapping {
+  scroll-snap-type: y proximity;
+}
+
+.container > div {
+  flex: none;
+  scroll-snap-align: center;
+  text-align: center;
+}
+
+.x.container > div {
+  font-size: 64px;
+  height: 128px;
+  line-height: 128px;
+  width: 100%;
+}
+
+.y.container > div {
+  font-size: 128px;
+  height: 100%;
+  line-height: 256px;
+  width: 256px;
+}
+
+.container > div:nth-child( even ) {
+  background-color: #87ea87;
+}
+
+.container > div:nth-child( odd ) {
+  background-color: #87ccea;
+}
+
+.y.container > div:first-child {
+  font-size: 64px;
+  line-height: 1.3;
+}
