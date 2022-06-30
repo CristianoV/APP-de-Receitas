@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 
 function DoneRecipes() {
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   const [recipes, setRecipes] = useState(doneRecipes || []);
-  const { pathname } = useLocation();
+  //   const { pathname } = useLocation();
 
   console.log(recipes);
   return (
@@ -33,16 +33,19 @@ function DoneRecipes() {
             />
             <p data-testid={ `${index}-horizontal-top-text` }>
               {
-                pathname.includes('/foods')
-                  ? `${recipe.nationality} - ${recipe.category}` : recipe.alcoholicOrNot
+                recipe.type === 'food' ? `${recipe.nationality} - ${recipe.category}`
+                  : recipe.alcoholicOrNot
               }
             </p>
             <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
             <button
-              data-testid={ `${index}-horizontal-share-btn` }
               type="button"
             >
-              <img src={ shareIcon } alt={ `icon share ${recipe.name}` } />
+              <img
+                src={ shareIcon }
+                data-testid={ `${index}-horizontal-share-btn` }
+                alt={ `icon share ${recipe.name}` }
+              />
             </button>
             { recipe.tags && recipe.tags.map((tag) => (
               <p key={ tag } data-testid={ `${index}-${tag}-horizontal-tag` }>
