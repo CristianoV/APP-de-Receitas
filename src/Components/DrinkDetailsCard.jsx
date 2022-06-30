@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import { handleStarRecipe } from '../utils/useFunctions';
 import CarouselCard from './CarouselCard';
 import ButtonShare from './ButtonsShare';
+import style from './CSS/PagDetails.module.css';
 
 export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
   const favorito = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -101,6 +102,7 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
         !useDone && !useInProgress && (
           <button
             type="button"
+            className={ style.containerButton }
             data-testid="start-recipe-btn"
             onClick={ () => handleStarRecipe(history, useRecipe.idDrink) }
           >
@@ -112,6 +114,7 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
         useInProgress && (
           <button
             type="button"
+            className={ style.containerButton }
             data-testid="start-recipe-btn"
             onClick={ () => handleStarRecipe(history, useRecipe.idDrink) }
           >

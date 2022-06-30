@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import { handleStarRecipe, handleStrYouTube } from '../utils/useFunctions';
 import CarouselCard from './CarouselCard';
 import ButtonShare from './ButtonsShare';
+import style from './CSS/PagDetails.module.css';
 
 export default function CardsDetails({ useRecipe, useIngredients }) {
   const favorito = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -53,7 +54,7 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
   }, [useInProgress, useRecipe]);
 
   return (
-    <div>
+    <div className={ style.container }>
 
       <div>
         <img
@@ -114,6 +115,7 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
         !useDone && !useInProgress && (
           <button
             type="button"
+            className={ style.containerButton }
             data-testid="start-recipe-btn"
             onClick={ () => handleStarRecipe(history, useRecipe.idMeal) }
           >
@@ -125,6 +127,7 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
         useInProgress && (
           <button
             type="button"
+            className={ style.containerButton }
             data-testid="start-recipe-btn"
             onClick={ () => handleStarRecipe(history, useRecipe.idMeal) }
           >
