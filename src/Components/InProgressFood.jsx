@@ -46,7 +46,7 @@ function InProgressFood({ ingredients, instructions }) {
       name: instructions.strMeal,
       image: instructions.strMealThumb,
       doneDate: Date(),
-      tags: instructions.strTags,
+      tags: instructions.strTags?.split(',') || '',
     }];
 
   const RemoveFavorite = favorite.filter((item) => item.id !== id);

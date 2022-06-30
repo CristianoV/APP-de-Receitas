@@ -16,6 +16,7 @@ import Header from './Components/Header';
 import Profile from './pages/Profile';
 import DetailsPage from './pages/DetailsPage';
 import InProgress from './pages/InProgress';
+import DoneRecipes from './pages/DoneRecipes';
 
 function App() {
   // TODO: Adicionar Header e Footer nas páginas principais Foods e Drinks
@@ -45,6 +46,7 @@ function App() {
         <Route path="/drinks/:id/in-progress" component={ InProgress } />
         <Route exact path="/explore/foods/nationalities" component={ FoodsNacionality } />
         <Route path="/profile" component={ Profile } />
+        <Route path="/done-recipes" component={ DoneRecipes } />
       </Switch>
     </div>
   );
