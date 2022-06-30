@@ -10,7 +10,7 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
   const [favorite, setFavorite] = useState(favorito || []);
   const { id } = useParams();
   const [useInProgress, setInProgress] = useState(false);
-  // const [useDone, setDone] = useState(false);
+  const [useDone, setDone] = useState(false);
   const [useUrlPage, setUrlPage] = useState(false);
   const { pathname } = useLocation();
   const history = useHistory();
@@ -33,15 +33,20 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
   useEffect(() => {
     function inProgress() {
       const localProgress = localStorage.getItem('inProgressRecipes');
-      // const localFinished = localStorage.getItem('doneRecipes');
+      const localDone = localStorage.getItem('doneRecipes');
 
       if (localProgress !== null) {
         const recipes = JSON.parse(localProgress);
         const keysInProgress = Object.keys(recipes.meals);
-        const verifyProgress = keysInProgress.some((ele) => ele === useRecipe.idMeal);
+        const verifyProgress = keysInProgress
+          .some((recipeId) => recipeId === useRecipe.idMeal);
 
         setInProgress(verifyProgress);
-        // setDone(verifyDone);
+      }
+      if (localDone !== null) {
+        const recipes = JSON.parse(localDone);
+        const verifyDone = recipes.some((recipe) => recipe.id === useRecipe.idMeal);
+        setDone(verifyDone);
       }
     }
     inProgress();
@@ -106,21 +111,24 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
 
       <CarouselCard />
       {
-        useInProgress ? (
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            onClick={ () => handleStarRecipe(history, useRecipe.idMeal) }
-          >
-            Continue Recipe
-          </button>
-        ) : (
+        !useDone && !useInProgress && (
           <button
             type="button"
             data-testid="start-recipe-btn"
             onClick={ () => handleStarRecipe(history, useRecipe.idMeal) }
           >
             Start Recipe
+          </button>
+        )
+      }
+      {
+        useInProgress && (
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            onClick={ () => handleStarRecipe(history, useRecipe.idMeal) }
+          >
+            Continue Recipe
           </button>
         )
       }

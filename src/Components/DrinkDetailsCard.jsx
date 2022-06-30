@@ -10,7 +10,7 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
   const [favorite, setFavorite] = useState(favorito || []);
   const { id } = useParams();
   const [useInProgress, setInProgress] = useState(false);
-  // const [useDone, setDone] = useState(false);
+  const [useDone, setDone] = useState(false);
   const [useUrlPage, setUrlPage] = useState(false);
   const { pathname } = useLocation();
   const history = useHistory();
@@ -33,7 +33,7 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
   useEffect(() => {
     function inProgress() {
       const localProgress = localStorage.getItem('inProgressRecipes');
-      // const localDone = localStorage.getItem('doneRecipes');
+      const localDone = localStorage.getItem('doneRecipes');
 
       if (localProgress !== null) {
         const recipesInProgress = JSON.parse(localProgress);
@@ -41,7 +41,11 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
         const verifyProgress = keysInProgress.some((ele) => ele === useRecipe.idDrink);
 
         setInProgress(verifyProgress);
-        // setDone(verifyDone);
+      }
+      if (localDone !== null) {
+        const recipes = JSON.parse(localDone);
+        const verifyDone = recipes.some((recipe) => recipe.id === useRecipe.idDrink);
+        setDone(verifyDone);
       }
     }
     inProgress();
@@ -93,8 +97,8 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
         <p data-testid="instructions">{useRecipe.strInstructions}</p>
       </div>
       <CarouselCard />
-      {/* {
-        !useDone && (
+      {
+        !useDone && !useInProgress && (
           <button
             type="button"
             data-testid="start-recipe-btn"
@@ -103,23 +107,15 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
             Start Recipe
           </button>
         )
-      } */}
+      }
       {
-        useInProgress ? (
+        useInProgress && (
           <button
             type="button"
             data-testid="start-recipe-btn"
             onClick={ () => handleStarRecipe(history, useRecipe.idDrink) }
           >
             Continue Recipe
-          </button>
-        ) : (
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            onClick={ () => handleStarRecipe(history, useRecipe.idDrink) }
-          >
-            Start Recipe
           </button>
         )
       }
