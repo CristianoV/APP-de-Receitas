@@ -65,6 +65,8 @@ html, body, .holster {
   width: 256px;
 }
 
+/*cores*/
+
 .container > div:nth-child(even) {
   background-color: #87ea87;
 }
