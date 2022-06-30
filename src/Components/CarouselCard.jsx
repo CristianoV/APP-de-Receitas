@@ -26,7 +26,10 @@ export default function CarouselCard() {
       <h1>Recomendation</h1>
       {useRecomend.length !== 0 && (
         useRecomend.slice(0, num).map((recipe, index) => (
-          <div data-testid={ `${index}-recomendation-card` } key={ index }>
+          <div
+            data-testid={ `${index}-recomendation-card` }
+            key={ index }
+          >
             <p data-testid={ `${index}-recomendation-title` }>
               { pathname.includes('drinks') ? recipe.strMeal : recipe.strDrink}
             </p>
