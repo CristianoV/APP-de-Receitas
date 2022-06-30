@@ -1,0 +1,30 @@
+.container {
+  align-items: center;
+  background: linear-gradient(269.49deg, #ffbaba 0.5%, white 99.61%);
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.container h1 {
+  background: linear-gradient(270deg, black 0%, #ff3d8e 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.containerInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.containerInput form {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.containerInput button {
+  background: linear-gradient(270deg, black 0%, #ff3d8e 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

@@ -1,0 +1,71 @@
+.container {
+  align-items: center;
+  background: linear-gradient(269.49deg, #ffbaba 0.5%, rgba(255, 219, 219, 0) 99.61%);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.container img {
+  height: 80%;
+  left: 32px;
+  top: 31px;
+  width: 296px;
+}
+
+.container h1 {
+  align-items: flex-end;
+  background: linear-gradient(270deg, #e65629 24.17%, #ff3d8e 67.92%);
+  background-clip: text;
+  display: flex;
+  font-family: Poppins , sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 38px;
+  text-align: center;
+  -webkit-text-fill-color: transparent;
+}
+
+.container input {
+  background: linear-gradient(269.36deg, rgba(255, 219, 219, 0) -59.26%, #ffbaba 99.52%);
+  border: none;
+  border-radius: 20px;
+  font-family: Poppins , sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  height: 15%;
+  line-height: 38px;
+  width: 60%;
+}
+
+.container input::placeholder {
+  color: white;
+}
+
+.container button {
+  background: linear-gradient(264.68deg, #ff684b -4.93%, #ff3d8e 103.52%);
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  height: 40px;
+  width: 30%;
+}
+
+.container button:hover {
+  background: linear-gradient(264.68deg, #ff3d8e -4.93%, #ff684b 103.52%);
+}
+
+.container form {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}

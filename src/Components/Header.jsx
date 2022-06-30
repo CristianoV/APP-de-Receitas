@@ -10,6 +10,7 @@ import { setInputSearch,
 import { actionCleanFilterCAtegory,
   setDrinksMainPage,
   setFoodsMainPage } from '../redux/action/mainPageAction';
+import style from './CSS/Header.module.css';
 
 function Header() {
   const [filter, setFilter] = useState('');
@@ -104,7 +105,7 @@ function Header() {
           { Receitas === null
            && (global.alert('Sorry, we haven\'t found any recipes for these filters.')
            )}
-          <header>
+          <header className={ style.container }>
             <Link to="/profile">
               <img src={ profileIcon } data-testid="profile-top-btn" alt="profile icon" />
             </Link>
@@ -126,7 +127,7 @@ function Header() {
               )}
             </div>
           </header>
-          <div>
+          <div className={ style.containerInput }>
             {search && location.pathname !== '/explore' && (
               <>
                 <input
@@ -168,14 +169,14 @@ function Header() {
                     />
                     Primeira Letra
                   </label>
-                  <button
-                    type="button"
-                    data-testid="exec-search-btn"
-                    onClick={ () => setInputRedux() }
-                  >
-                    Busca
-                  </button>
                 </form>
+                <button
+                  type="button"
+                  data-testid="exec-search-btn"
+                  onClick={ () => setInputRedux() }
+                >
+                  Busca
+                </button>
               </>)}
           </div>
         </div>

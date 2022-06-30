@@ -1,0 +1,10 @@
+.container {
+  background: linear-gradient(269.49deg, white 0.5%, #ffbaba 99.61%);
+  display: flex;
+  gap: 3em;
+  justify-content: center;
+  margin-top: -2.5em;
+  position: fixed;
+  top: 100%;
+  width: 100%;
+}
