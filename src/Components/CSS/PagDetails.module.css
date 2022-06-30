@@ -1,8 +1,10 @@
 .containerButton {
   background: linear-gradient(269.49deg, white 0.5%, #ffbaba 99.61%);
+  bottom: 0;
   display: flex;
   gap: 3em;
   justify-content: center;
+  margin-bottom: 0.5em;
   margin-top: -2.5em;
   position: fixed;
   top: 100%;
