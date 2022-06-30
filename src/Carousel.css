@@ -1,6 +1,102 @@
-.carrosel{
-  display: flex;
-  overflow: hidden;
-  width: 100px;
-  height: 100px;
+html, body, .holster {
+  height: 100%;
 }
+.holster {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: column nowrap;
+  font-family: monospace;
+}
+
+.container {
+  display: flex;
+  overflow: auto;
+  outline: 1px dashed lightgray;
+  flex: none;
+}
+
+.container.x {
+  width: 100%;
+  height: 128px;
+  flex-flow: row nowrap;
+}
+
+.container.y {
+  width: 256px;
+  height: 256px;
+  flex-flow: column nowrap;
+}
+/* scroll-snap */
+.x.mandatory-scroll-snapping {
+  scroll-snap-type: x mandatory;
+}
+
+.y.mandatory-scroll-snapping {
+  scroll-snap-type: y mandatory;
+}
+
+.x.proximity-scroll-snapping {
+  scroll-snap-type: x proximity;
+}
+
+.y.proximity-scroll-snapping {
+  scroll-snap-type: y proximity;
+}
+
+.container > div {
+  text-align: center;
+  scroll-snap-align: center;
+  flex: none;
+}
+
+.x.container > div {
+  line-height: 128px;
+  font-size: 64px;
+  width: 100%;
+  height: 128px;
+}
+
+.y.container > div {
+  line-height: 256px;
+  font-size: 128px;
+  width: 256px;
+  height: 100%;
+}
+/* appearance fixes */
+.y.container > div:first-child {
+  line-height: 1.3;
+  font-size: 64px;
+}
+/* coloration */
+.container > div:nth-child(even) {
+  background-color: #87EA87;
+}
+
+.container > div:nth-child(odd) {
+  background-color: #87CCEA;
+}
+
+/* 
+.carrocel{
+  display: flex;
+  overflow-x: scroll;
+  width: 100%;
+  position: relative;
+  animation: slide 15s infinite ease-out;
+}
+
+.carrocel h1 img{
+  width: 10%;
+  height: 30%; 
+}
+*/
+
+/*@keyframes slide {
+  0%{left: 0px}
+
+  50%{left: -600px}
+
+  100%{left: -1200px}
+}
+*/
