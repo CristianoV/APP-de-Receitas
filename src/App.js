@@ -19,7 +19,6 @@ import InProgress from './pages/InProgress';
 import DoneRecipes from './pages/DoneRecipes';
 
 function App() {
-  // TODO: Adicionar Header e Footer nas páginas principais Foods e Drinks
   return (
     <div>
       <Header />
