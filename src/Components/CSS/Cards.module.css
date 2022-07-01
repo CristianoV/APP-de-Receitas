@@ -1,0 +1,19 @@
+.container img {
+  height: 100%;
+  width: 100%;
+}
+
+@media ( min-width : 500px ) {
+
+  .container img {
+    height: 80%;
+    width: 80%;
+  }
+
+  .container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

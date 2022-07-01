@@ -29,6 +29,11 @@
   -webkit-text-fill-color: transparent;
 }
 
+.container p {
+  cursor: pointer;
+  font-family: Poppins , sans-serif;
+}
+
 .container input {
   background: linear-gradient(269.36deg, rgba(255, 219, 219, 0) -59.26%, #ffbaba 99.52%);
   border: none;

@@ -7,6 +7,7 @@ import { setDrinksMainPage,
   setFoodsMainPage, setFoodsCategory,
   setDrinksCategory,
   actionCleanFilterCAtegory } from '../redux/action/mainPageAction';
+import style from '../Components/CSS/MainPage.module.css';
 
 function Mainpage() {
   const dispatch = useDispatch();
@@ -64,27 +65,29 @@ function Mainpage() {
 
   return (
     <div>
-      <button
-        type="button"
-        data-testid="All-category-filter"
-        name="All"
-        onClick={ () => dispatch(actionCleanFilterCAtegory()) }
-      >
-        All
-      </button>
-      {
-        category && category.map((cat) => (
-          <button
-            type="button"
-            key={ cat }
-            data-testid={ `${cat}-category-filter` }
-            name={ cat }
-            onClick={ (e) => setRecipesCategory(e) }
-          >
-            {cat}
-          </button>
-        ))
-      }
+      <div className={ style.container }>
+        <button
+          type="button"
+          data-testid="All-category-filter"
+          name="All"
+          onClick={ () => dispatch(actionCleanFilterCAtegory()) }
+        >
+          All
+        </button>
+        {
+          category && category.map((cat) => (
+            <button
+              type="button"
+              key={ cat }
+              data-testid={ `${cat}-category-filter` }
+              name={ cat }
+              onClick={ (e) => setRecipesCategory(e) }
+            >
+              {cat}
+            </button>
+          ))
+        }
+      </div>
       <Card />
       <Footer />
     </div>

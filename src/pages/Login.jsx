@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import style from '../Components/CSS/Login.module.css';
+import Panelinha from '../images/panelinha.svg';
 
 function Login(props) {
   const [login, setLogin] = useState({ email: '', password: '' });
@@ -39,7 +40,8 @@ function Login(props) {
 
   return (
     <div className={ style.container }>
-      <img src="https://s3-alpha-sig.figma.com/img/39d7/c3de/8b6b8d8643b1c235049af9ced9253fa1?Expires=1657497600&Signature=BXDPDKfE4Aq~8AwlJyU~oKGFPQ4m4EqWMxyxmpkyNKQMkouL4b2QDwNf8SlV4pHw6e5CVfOr2oFCqFyQDxAbV9g4gIX1WIs9O5UHRDbfBZ552AcKObFKAQX2qi2HGbTf~KBiTnttod4yPhICUj~x3ttyL1lbM1qchAkdgTDBm8h6qmiWPESImculFVazLaGIJ5V2fRIaS-OnURHTCF7sX3x58SEko42VTaucMO1SxzvLRYUim44-dI4humhYglHkxMSCMWztamguSL6SBzFH8QdHFNsHaQowFFJ0dZ820jA-noTkk-1BfK9n4LbFLllLRpFinMO8Lpgr3-n33aIv7A__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA" alt="" />
+      <img src={ Panelinha } alt="" />
+      {/* <img src="https://s3-alpha-sig.figma.com/img/39d7/c3de/8b6b8d8643b1c235049af9ced9253fa1?Expires=1657497600&Signature=BXDPDKfE4Aq~8AwlJyU~oKGFPQ4m4EqWMxyxmpkyNKQMkouL4b2QDwNf8SlV4pHw6e5CVfOr2oFCqFyQDxAbV9g4gIX1WIs9O5UHRDbfBZ552AcKObFKAQX2qi2HGbTf~KBiTnttod4yPhICUj~x3ttyL1lbM1qchAkdgTDBm8h6qmiWPESImculFVazLaGIJ5V2fRIaS-OnURHTCF7sX3x58SEko42VTaucMO1SxzvLRYUim44-dI4humhYglHkxMSCMWztamguSL6SBzFH8QdHFNsHaQowFFJ0dZ820jA-noTkk-1BfK9n4LbFLllLRpFinMO8Lpgr3-n33aIv7A__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA" alt="" /> */}
       <h1>Welcome to Gostosin</h1>
       <form>
         <input
@@ -66,7 +68,7 @@ function Login(props) {
         >
           Enter
         </button>
-        Create account
+        <p>Create account</p>
       </form>
     </div>
   );

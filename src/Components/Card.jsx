@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { actionCleanFilterCAtegory } from '../redux/action/mainPageAction';
+import style from './CSS/Cards.module.css';
 
 function Card() {
   const Receitas = useSelector((state) => state.reducerHeader.Receitas);
@@ -13,7 +14,7 @@ function Card() {
     dispatch(actionCleanFilterCAtegory());
   }, [pathname, dispatch]);
   return (
-    <div>
+    <div className={ style.container }>
       { foodsCategory
       && foodsCategory.map((receitas, index) => (
         <div key={ index }>
@@ -29,7 +30,7 @@ function Card() {
                 <img
                   src={ pathname === '/foods'
                     ? receitas.strMealThumb : receitas.strDrinkThumb }
-                  style={ { width: '100%' } }
+                  // style={ { width: '100%' } }
                   alt=""
                   data-testid={ `${index}-card-img` }
                 />
@@ -54,7 +55,7 @@ function Card() {
                    src={ pathname === '/foods'
                      ? receitas.strMealThumb : receitas.strDrinkThumb }
                    alt=""
-                   style={ { width: '100%' } }
+                   //  style={ { width: '100%' } }
                    data-testid={ `${index}-card-img` }
                  />
                </div>
