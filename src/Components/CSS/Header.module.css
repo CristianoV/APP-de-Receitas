@@ -3,6 +3,7 @@
   background: linear-gradient(269.49deg, #ffbaba 0.5%, white 99.61%);
   display: flex;
   justify-content: space-evenly;
+  width: 100%;
 }
 
 .container h1 {
@@ -15,6 +16,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 5px;
 }
 
 .containerInput form {
@@ -24,7 +26,14 @@
 }
 
 .containerInput button {
+  align-self: center;
   background: linear-gradient(270deg, black 0%, #ff3d8e 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  width: 20%;
+}
+
+.input {
+  align-self: center;
+  width: 80%;
 }

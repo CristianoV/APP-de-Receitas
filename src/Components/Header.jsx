@@ -134,6 +134,8 @@ function Header() {
                   type="text"
                   name=""
                   data-testid="search-input"
+                  className={ style.input }
+                  placeholder="Search"
                   id=""
                   value={ filter }
                   onChange={ handleFilter }
