@@ -11,13 +11,13 @@ function DoneRecipes() {
   const setRecipesCategory = ({ target }) => {
     const { name } = target;
     if (name === 'All') {
-      setRecipes(doneRecipes);
+      setRecipes([...doneRecipes]);
     }
     if (name === 'Food') {
-      const filterRecipes = doneRecipes.filter((recipe) => recipe.type === 'food');
+      const filterRecipes = [...doneRecipes].filter((recipe) => recipe.type === 'food');
       setRecipes(filterRecipes);
     } if (name === 'Drink') {
-      const filterRecipes = doneRecipes.filter((recipe) => recipe.type === 'drink');
+      const filterRecipes = [...doneRecipes].filter((recipe) => recipe.type === 'drink');
       setRecipes(filterRecipes);
     }
   };
