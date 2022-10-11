@@ -1,13 +1,12 @@
 .container {
   align-items: center;
-  background: linear-gradient(269.49deg, #ffbaba 0.5%, white 99.61%);
   display: flex;
   justify-content: space-evenly;
   width: 100%;
 }
 
 .container h1 {
-  background: linear-gradient(270deg, black 0%, #ff3d8e 100%);
+  background: linear-gradient(270deg, black 0%, red 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -27,7 +26,7 @@
 
 .containerInput button {
   align-self: center;
-  background: linear-gradient(270deg, black 0%, #ff3d8e 100%);
+  background: linear-gradient(270deg, black 0%, red 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
   width: 20%;

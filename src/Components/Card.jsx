@@ -24,16 +24,15 @@ function Card() {
                 to={ pathname === '/foods' ? `/foods/${receitas.idMeal}`
                   : `/drinks/${receitas.idDrink}` }
               >
-                <h1 data-testid={ `${index}-card-name` }>
-                  { pathname === '/foods' ? receitas.strMeal : receitas.strDrink}
-                </h1>
                 <img
                   src={ pathname === '/foods'
                     ? receitas.strMealThumb : receitas.strDrinkThumb }
-                  // style={ { width: '100%' } }
                   alt=""
                   data-testid={ `${index}-card-img` }
                 />
+                <h1 data-testid={ `${index}-card-name` }>
+                  { pathname === '/foods' ? receitas.strMeal : receitas.strDrink}
+                </h1>
               </Link>
             </div>
           )}
@@ -43,14 +42,11 @@ function Card() {
        && Receitas.map((receitas, index) => (
          <div key={ index }>
            {index < MAX_INDEX_CARD && (
-             <Link
-               to={ pathname === '/foods' ? `/foods/${receitas.idMeal}`
-                 : `/drinks/${receitas.idDrink}` }
-             >
-               <div data-testid={ `${index}-recipe-card` }>
-                 <h1 data-testid={ `${index}-card-name` }>
-                   { pathname === '/foods' ? receitas.strMeal : receitas.strDrink}
-                 </h1>
+             <div data-testid={ `${index}-recipe-card` }>
+               <Link
+                 to={ pathname === '/foods' ? `/foods/${receitas.idMeal}`
+                   : `/drinks/${receitas.idDrink}` }
+               >
                  <img
                    src={ pathname === '/foods'
                      ? receitas.strMealThumb : receitas.strDrinkThumb }
@@ -58,8 +54,11 @@ function Card() {
                    //  style={ { width: '100%' } }
                    data-testid={ `${index}-card-img` }
                  />
-               </div>
-             </Link>
+                 <h1 data-testid={ `${index}-card-name` }>
+                   { pathname === '/foods' ? receitas.strMeal : receitas.strDrink}
+                 </h1>
+               </Link>
+             </div>
            )}
          </div>
        ))}
