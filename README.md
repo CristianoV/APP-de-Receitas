@@ -4,6 +4,15 @@ Projeto APP de Receitas!
 
 <div align="center"><img src="./app.gif"></div>
 
+## :man_technologist: Tecnologias, bibliotecas e arquiteturas usadas
+  * __React.js__
+  * __React Router Dom__
+  * __React Testing Library__
+  * __Redux__
+  * __Redux Thunk__
+  * __Jest__
+  * __CSS3__
+
 # Instruções da aplicação
 ### Instalar dependências
 ```
