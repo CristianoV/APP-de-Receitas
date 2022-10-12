@@ -4,6 +4,23 @@ Projeto APP de Receitas!
 
 <div align="center"><img src="./app.gif"></div>
 
+# Instruções da aplicação
+### Instalar dependências
+```
+cd Game-Trivia
+npm install
+```
+
+### Iniciar Projeto
+```
+npm start
+```
+<!--
+### Rodar Testes
+```
+npm test
+```
+-->
 <!-- Olá, Tryber!
 
 Esse é apenas um arquivo inicial para o README do seu projeto.
