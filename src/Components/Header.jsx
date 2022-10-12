@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { BsSearch } from 'react-icons/bs';
+import { IoMdPerson } from 'react-icons/io';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
 import { setInputSearch,
   setReceitas, setSearchHeader,
   setNome, setLetra, setDrinks,
@@ -19,6 +19,7 @@ function Header() {
   const location = useLocation();
   const dispatch = useDispatch();
   const url = location.pathname.split('/')[1];
+  const urls = location.pathname.split('/');
   const Receitas = useSelector((state) => state.reducerHeader.Receitas);
   const history = useHistory();
 
@@ -106,80 +107,78 @@ function Header() {
            && (global.alert('Sorry, we haven\'t found any recipes for these filters.')
            )}
           <header className={ style.container }>
-            <Link to="/profile">
-              <img src={ profileIcon } data-testid="profile-top-btn" alt="profile icon" />
-            </Link>
             <h1 data-testid="page-title">
               {url[0].toUpperCase() + url.slice(1).toLowerCase()}
             </h1>
             <div>
-              {location.pathname !== '/explore' && (
+              {location.pathname !== '/explore' && !urls[2] && (
                 <button
                   type="button"
+                  style={ { border: 'none', background: 'none' } }
                   onClick={ () => buttonSearch() }
                 >
-                  <img
-                    src={ searchIcon }
-                    data-testid="search-top-btn"
-                    alt="profile icon"
-                  />
+                  <BsSearch />
                 </button>
               )}
+              <Link to="/profile">
+                <IoMdPerson />
+              </Link>
             </div>
           </header>
           <div className={ style.containerInput }>
-            {search && location.pathname !== '/explore' && (
-              <>
-                <input
-                  type="text"
-                  name=""
-                  data-testid="search-input"
-                  className={ style.input }
-                  placeholder="Search"
-                  id=""
-                  value={ filter }
-                  onChange={ handleFilter }
-                />
-                <form action="">
-                  <label htmlFor="Ingredientes">
-                    <input
-                      type="radio"
-                      name="searchInput"
-                      id="Ingredientes"
-                      onClick={ () => setInputFilter('Ingredientes') }
-                      data-testid="ingredient-search-radio"
-                    />
-                    Ingredientes
-                  </label>
-                  <label htmlFor="Nome">
-                    <input
-                      type="radio"
-                      name="searchInput"
-                      id="Nome"
-                      onClick={ () => setInputFilter('Nome') }
-                      data-testid="name-search-radio"
-                    />
-                    Nome
-                  </label>
-                  <label htmlFor="Letra">
-                    <input
-                      type="radio"
-                      name="searchInput"
-                      id="Letra"
-                      onClick={ () => setInputFilter('Letra') }
-                      data-testid="first-letter-search-radio"
-                    />
-                    Primeira Letra
-                  </label>
-                </form>
-                <button
-                  type="button"
-                  data-testid="exec-search-btn"
-                  onClick={ () => setInputRedux() }
-                >
-                  Busca
-                </button>
-              </>)}
+            {search && location.pathname !== '/explore'
+             && (
+               <>
+                 <input
+                   type="text"
+                   name=""
+                   data-testid="search-input"
+                   className={ style.input }
+                   placeholder="Search"
+                   id=""
+                   value={ filter }
+                   onChange={ handleFilter }
+                 />
+                 <form action="">
+                   <label htmlFor="Ingredientes">
+                     <input
+                       type="radio"
+                       name="searchInput"
+                       id="Ingredientes"
+                       onClick={ () => setInputFilter('Ingredientes') }
+                       data-testid="ingredient-search-radio"
+                     />
+                     Ingredientes
+                   </label>
+                   <label htmlFor="Nome">
+                     <input
+                       type="radio"
+                       name="searchInput"
+                       id="Nome"
+                       onClick={ () => setInputFilter('Nome') }
+                       data-testid="name-search-radio"
+                     />
+                     Nome
+                   </label>
+                   <label htmlFor="Letra">
+                     <input
+                       type="radio"
+                       name="searchInput"
+                       id="Letra"
+                       onClick={ () => setInputFilter('Letra') }
+                       data-testid="first-letter-search-radio"
+                     />
+                     Primeira Letra
+                   </label>
+                 </form>
+                 <button
+                   type="button"
+                   data-testid="exec-search-btn"
+                   onClick={ () => setInputRedux() }
+                 >
+                   Busca
+                 </button>
+               </>)}
           </div>
         </div>
       )}

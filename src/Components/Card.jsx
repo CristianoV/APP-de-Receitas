@@ -29,6 +29,7 @@ function Card() {
                     ? receitas.strMealThumb : receitas.strDrinkThumb }
                   alt=""
                   data-testid={ `${index}-card-img` }
+                  loading="lazy"
                 />
                 <h1 data-testid={ `${index}-card-name` }>
                   { pathname === '/foods' ? receitas.strMeal : receitas.strDrink}
@@ -51,7 +52,6 @@ function Card() {
                    src={ pathname === '/foods'
                      ? receitas.strMealThumb : receitas.strDrinkThumb }
                    alt=""
-                   //  style={ { width: '100%' } }
                    data-testid={ `${index}-card-img` }
                  />
                  <h1 data-testid={ `${index}-card-name` }>

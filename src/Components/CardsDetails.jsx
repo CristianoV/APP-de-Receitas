@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory, useParams } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { handleStarRecipe, handleStrYouTube } from '../utils/useFunctions';
-import CarouselCard from './CarouselCard';
+// import CarouselCard from './CarouselCard';
 import ButtonShare from './ButtonsShare';
 import style from './CSS/PagDetails.module.css';
 
@@ -56,12 +56,7 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
   return (
     <div className={ style.container }>
 
-      <div>
-        <img
-          src={ useRecipe.strMealThumb }
-          alt="Food"
-          data-testid="recipe-photo"
-        />
+      <div className={ style.information }>
         <h1 data-testid="recipe-title">{ useRecipe.strMeal }</h1>
         <ButtonShare
           urlPageFormatado={ urlPage }
@@ -74,10 +69,17 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
         {
           useUrlPage && (<p>Link copied!</p>)
         }
+
+        <img
+          src={ useRecipe.strMealThumb }
+          alt="Food"
+          data-testid="recipe-photo"
+        />
         <p data-testid="recipe-category">{useRecipe.strCategory}</p>
       </div>
 
       <div>
+        <h2>Ingredients</h2>
         {useIngredients.map(({ theIngredients, theMeasures }, index) => (
           <div
             key={ index }
@@ -97,6 +99,7 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
       </div>
 
       <div>
+        <h2>Instructions</h2>
         <p data-testid="instructions">{useRecipe.strInstructions}</p>
       </div>
 
@@ -110,7 +113,7 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
         />
       </div>
 
-      <CarouselCard />
+      {/* <CarouselCard /> */}
       {
         !useDone && !useInProgress && (
           <button

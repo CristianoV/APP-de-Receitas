@@ -5,6 +5,7 @@ import CardsDetails from '../Components/CardsDetails';
 import DrinkCardsDetails from '../Components/DrinkDetailsCard';
 import { handleIngredients } from '../utils/useFunctions';
 import { setDrinksDetails, setFoodsDetails } from '../redux/action/detailsPageActions';
+import Loading from '../Components/Loading';
 
 export default function DetailsPage() {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ export default function DetailsPage() {
     <section>
       {
         useRecipe.length === 0 && (
-          <p>loading...</p>
+          <Loading />
         )
       }
       {

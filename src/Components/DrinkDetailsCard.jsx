@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory, useParams } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { handleStarRecipe } from '../utils/useFunctions';
-import CarouselCard from './CarouselCard';
+// import CarouselCard from './CarouselCard';
 import ButtonShare from './ButtonsShare';
 import style from './CSS/PagDetails.module.css';
 
@@ -54,12 +54,7 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
 
   return (
     <div>
-      <div>
-        <img
-          src={ useRecipe.strDrinkThumb }
-          alt="Drink"
-          data-testid="recipe-photo"
-        />
+      <div className={ style.information }>
         <h1 data-testid="recipe-title">{useRecipe.strDrink}</h1>
         <ButtonShare
           urlPageFormatado={ urlPage }
@@ -72,11 +67,16 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
         {
           useUrlPage && (<p>Link copied!</p>)
         }
+        <img
+          src={ useRecipe.strDrinkThumb }
+          alt="Drink"
+          data-testid="recipe-photo"
+        />
         <p>{useRecipe.strCategory}</p>
-        <p data-testid="recipe-category">{useRecipe.strAlcoholic}</p>
+        <span data-testid="recipe-category">{useRecipe.strAlcoholic}</span>
       </div>
 
-      <div>
+      <div className={ style.instructions }>
         {useIngredients.map(({ theIngredients, theMeasures }, index) => (
           <div
             key={ index }
@@ -93,11 +93,10 @@ export default function DrinkCardsDetails({ useRecipe, useIngredients }) {
             </p>
           </div>
         ))}
+        <div>
+          <p data-testid="instructions">{useRecipe.strInstructions}</p>
+        </div>
       </div>
-      <div>
-        <p data-testid="instructions">{useRecipe.strInstructions}</p>
-      </div>
-      <CarouselCard />
       {
         !useDone && !useInProgress && (
           <button

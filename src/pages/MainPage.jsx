@@ -8,6 +8,7 @@ import { setDrinksMainPage,
   setDrinksCategory,
   actionCleanFilterCAtegory } from '../redux/action/mainPageAction';
 import style from '../Components/CSS/MainPage.module.css';
+import Loading from '../Components/Loading';
 
 function Mainpage() {
   const dispatch = useDispatch();
@@ -66,14 +67,19 @@ function Mainpage() {
   return (
     <div>
       <div className={ style.container }>
-        <button
-          type="button"
-          data-testid="All-category-filter"
-          name="All"
-          onClick={ () => dispatch(actionCleanFilterCAtegory()) }
-        >
-          All
-        </button>
+        {category.length === 0 && (
+          <Loading />
+        )}
+        { category.length !== 0 && (
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            name="All"
+            onClick={ () => dispatch(actionCleanFilterCAtegory()) }
+          >
+            All
+          </button>)}
+
         {
           category && category.map((cat) => (
             <button
