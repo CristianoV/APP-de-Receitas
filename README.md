@@ -1,5 +1,7 @@
 # 🚧 README em construção 🚧
 
+<div align="center"><img src="./app.gif"></div>
+
 <!-- Olá, Tryber!
 
 Esse é apenas um arquivo inicial para o README do seu projeto.
