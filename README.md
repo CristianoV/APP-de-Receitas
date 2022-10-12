@@ -1,4 +1,6 @@
-# 🚧 README em construção 🚧
+<h1 align="center">
+Projeto APP de Receitas!
+</h1>
 
 <div align="center"><img src="./app.gif"></div>
 
