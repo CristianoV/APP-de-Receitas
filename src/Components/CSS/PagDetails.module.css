@@ -1,12 +1,43 @@
+.container img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
 .containerButton {
-  background: linear-gradient(269.49deg, white 0.5%, #ffbaba 99.61%);
   bottom: 0;
-  display: flex;
-  gap: 3em;
-  justify-content: center;
   margin-bottom: 0.5em;
   margin-top: -2.5em;
   position: fixed;
   top: 100%;
   width: 100%;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+}
+
+.information h1 {
+  font-weight: 600;
+}
+
+.information p {
+  align-self: center;
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+}
+
+
+@media screen and ( min-width : 768px ) {
+
+  .container img {
+    height: 50%;
+    object-fit: cover;
+    object-position: center;
+    width: 50%;
+  }
+
 }
