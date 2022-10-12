@@ -7,7 +7,7 @@ Projeto APP de Receitas!
 # Instruções da aplicação
 ### Instalar dependências
 ```
-cd Game-Trivia
+cd APP-de-Receitas
 npm install
 ```
 
