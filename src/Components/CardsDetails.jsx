@@ -106,8 +106,6 @@ export default function CardsDetails({ useRecipe, useIngredients }) {
       <div>
         <iframe
           title={ useRecipe.strMeal }
-          width="420"
-          height="315"
           src={ handleStrYouTube(useRecipe.strYoutube) }
           data-testid="video"
         />

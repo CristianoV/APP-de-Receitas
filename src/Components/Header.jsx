@@ -107,9 +107,11 @@ function Header() {
            && (global.alert('Sorry, we haven\'t found any recipes for these filters.')
            )}
           <header className={ style.container }>
-            <h1 data-testid="page-title">
-              {url[0].toUpperCase() + url.slice(1).toLowerCase()}
-            </h1>
+            <Link to={ `/${url}` }>
+              <h1 data-testid="page-title">
+                {url[0].toUpperCase() + url.slice(1).toLowerCase()}
+              </h1>
+            </Link>
             <div>
               {location.pathname !== '/explore' && !urls[2] && (
                 <button
