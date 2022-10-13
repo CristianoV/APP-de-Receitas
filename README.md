@@ -5,7 +5,8 @@ Projeto APP de Receitas!
 <div align="center"><img src="./app.gif"></div>
 
 ## :books: Contexto
-Esse projeto simula um APP de receitas onde o usuario pode pesquisar por comidas e drinks podendo fazer um checklist com as receitas e salvar as favoritas. O projeto foi feito em grupo simulando um ambiente de desenvolvimento. Utilizamos de metodologias agéis no decorrer do trabalho.
+Esse projeto simula um APP de receitas onde o usuario pode pesquisar por comidas e drinks podendo fazer um checklist com as receitas e salvar as favoritas. O projeto foi feito em grupo simulando um ambiente de desenvolvimento.
+Utilizamos de metodologias agéis no decorrer do trabalho para melhorar o ritmo do desenvolvimento. 
 
 ## :man_technologist: Tecnologias, bibliotecas e arquiteturas usadas
   * __React.js__
