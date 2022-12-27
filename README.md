@@ -1,4 +1,4 @@
-<h1 align="center">
+<h1 align="center"> 
 Projeto APP de Receitas!
 </h1>
 
